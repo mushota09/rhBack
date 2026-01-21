@@ -1,0 +1,3 @@
+.venv/
+rhBack/__pycache__/
+rhBack/migrations/
