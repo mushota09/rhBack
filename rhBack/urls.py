@@ -1,17 +1,17 @@
+from adrf import routers
 from django.conf import settings
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from adrf import routers
-# from test_async_app.urls import router as test_async_app_router
+from django.conf.urls.static import static
+from user_app.urls import router as user_app_router
 
 router=routers.DefaultRouter()
-# router.registry.extend(test_async_app_router.registry)
+router.registry.extend(user_app_router.registry)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    # path('', include('test_async_app.urls')),
+    path('', include('user_app.urls')),
 ]
 
 if settings.DEBUG:
