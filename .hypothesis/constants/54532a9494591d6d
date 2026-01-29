@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\utilities\auth.py
+# hypothesis_version: 6.151.2
+
+['Authorization', 'Bearer ', 'Token invalide', 'access', 'user_id']

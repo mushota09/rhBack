@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\modules\entree_paie\views.py
+# hypothesis_version: 6.151.2
+
+[100, '-created_at', '0', 'bulletins_generes', 'calculated_at', 'created_at', 'employe_id', 'employe_id__nom', 'employe_id__prenom', 'entrees_calculees', 'entrees_validees', 'error', 'generate_payslip', 'get', 'list', 'payslip_generated', 'periode_paie_id', 'recalculate', 'regenerate_payslip', 'salaire_base', 'salaire_brut', 'salaire_net', 'taux_validation', 'total_entrees', 'total_salaire_brut', 'total_salaire_net', 'validated_at']

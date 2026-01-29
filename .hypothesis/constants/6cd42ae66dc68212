@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\urls.py
+# hypothesis_version: 6.151.2
+
+['audit_log', 'audit_logAPIView', 'contrat', 'contratAPIView', 'document', 'documentAPIView', 'employe', 'employeAPIView', 'historique_contrat', 'login', 'login/', 'logout', 'logout/', 'poste', 'posteAPIView', 'protected', 'protected/', 'refresh', 'refresh/', 'service', 'serviceAPIView', 'user', 'userAPIView']

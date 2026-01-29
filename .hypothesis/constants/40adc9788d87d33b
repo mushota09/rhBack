@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\modules\periode_paie\serializers.py
+# hypothesis_version: 6.151.2
+
+[500, 'APPROVED', 'FINALIZED', 'Période non trouvée', '__all__', 'annee', 'approuve_par', 'created_at', 'date_approbation', 'date_debut', 'date_fin', 'force_reprocess', 'get_statut_display', 'id', 'mois', 'nombre_employes', 'periode', 'statut', 'statut_display', 'total_net_a_payer', 'traite_par', 'updated_at']

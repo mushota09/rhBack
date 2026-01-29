@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\modules\employe\views.py
+# hypothesis_version: 6.151.2
+
+['-id', '12345', 'adresse_ligne1', 'adresse_ligne2', 'banque', 'code_postal', 'email', 'email_personnel', 'email_professionnel', 'matricule', 'nationalite', 'niveau_etude', 'nom', 'numero_compte', 'numero_inss', 'password', 'pays', 'photo', 'poste_id', 'poste_id.service_id', 'poste_id__service_id', 'postnom', 'prenom', 'province', 'sexe', 'statut_matrimonial', 'telephone_personnel', 'ville']

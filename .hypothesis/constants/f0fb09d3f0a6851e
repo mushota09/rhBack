@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\migrations\0002_entree_paie_calculated_at_entree_paie_calculated_by_and_more.py
+# hypothesis_version: 6.151.2
+
+['0001_initial', 'calculated_at', 'calculated_by', 'calculated_entries', 'entree_paie', 'modification_history', 'paie_app', 'validated_at', 'validated_by', 'validated_entries']

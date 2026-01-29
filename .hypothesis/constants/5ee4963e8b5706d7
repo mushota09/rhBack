@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\modules\retenue_employe\serializers.py
+# hypothesis_version: 6.151.2
+
+[500, '__all__', 'created_at', 'cree_par', 'date_debut', 'date_fin', 'description', 'employe_nom_complet', 'est_active', 'est_recurrente', 'id', 'modification_history', 'montant_deja_deduit', 'montant_mensuel', 'montant_restant', 'montant_total', 'type_retenue', 'updated_at']

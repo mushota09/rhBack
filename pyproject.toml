@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "adrf>=0.1.12",
-    " ==0.1.0",
+    "adrf-flex-fields==0.1.0",
     "django==5.2",
     "django-cors-headers>=4.9.0",
     "django-filter>=25.2",
@@ -15,4 +15,13 @@ dependencies = [
     "psycopg[binary]>=3.3.2",
     "python-dotenv>=1.2.1",
     "uvicorn>=0.40.0",
+    # Paie system dependencies
+    "reportlab>=4.0.0",
+    "weasyprint>=62.0",
+    "openpyxl>=3.1.0",
+    "celery>=5.3.0",
+    "redis>=5.0.0",
+    "hypothesis>=6.100.0",
+    "pytest>=7.4.0",
+    "pytest-django>=4.5.0",
 ]

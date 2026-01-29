@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\migrations\0003_periode_paie_approuve_par_and_more.py
+# hypothesis_version: 6.151.2
+
+['APPROVED', 'Approuvé', 'Brouillon', 'COMPLETED', 'DRAFT', 'En traitement', 'FINALIZED', 'Finalisé', 'PROCESSING', 'Terminé', 'approuve_par', 'date_approbation', 'paie_app', 'periode_paie', 'periodes_approuvees', 'statut']

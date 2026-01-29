@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\services\validation_service.py
+# hypothesis_version: 6.151.2
+
+['0', 'ACTIVE', 'Employé non trouvé', 'IRE négatif', 'Salaire net négatif', 'allocation_familiale', 'base_imposable', 'en_cours', 'inss', 'inss_pension', 'inss_risque', 'ire', 'salaire_brut', 'salaire_net']

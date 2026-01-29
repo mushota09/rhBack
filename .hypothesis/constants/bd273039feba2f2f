@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\utilities\jwt_utils.py
+# hypothesis_version: 6.151.2
+
+['HS256', 'Token expiré', 'Token invalide', 'access', 'exp', 'iat', 'refresh', 'type', 'user_id']

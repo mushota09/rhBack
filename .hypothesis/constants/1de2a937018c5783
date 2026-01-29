@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\services\alert_service.py
+# hypothesis_version: 6.151.2
+
+['-created_at', 'ACKNOWLEDGED', 'ACTIVE', 'CRITICAL', 'HIGH', 'MEDIUM', 'RESOLVED', 'VALIDATION_ERROR', 'acknowledged_at', 'acknowledged_by', 'alert_type', 'created_by', 'details', 'email_sent', 'email_sent_at', 'employe_id', 'error_count', 'errors', 'message', 'periode_paie_id', 'resolved_at', 'resolved_by', 'severity', 'status', 'timestamp', 'title']

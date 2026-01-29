@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\conge_app\modules\historique_conge\serializers.py
+# hypothesis_version: 6.151.2
+
+['__all__', 'demande_conge_id', 'poste_valideur_id']

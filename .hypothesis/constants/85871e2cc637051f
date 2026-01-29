@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\conge_app\modules\demande_conge\serializers.py
+# hypothesis_version: 6.151.2
+
+['__all__', 'approuve_par_id', 'employe_id', 'type_conge_id']

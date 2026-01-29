@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\conge_app\urls.py
+# hypothesis_version: 6.151.2
+
+['demande_conge', 'demande_congeAPIView', 'historique_conge', 'solde_conge', 'solde_congeAPIView', 'type_conge', 'type_congeAPIView']

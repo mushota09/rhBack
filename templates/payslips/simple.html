@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulletin de Paie Simple</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #333;
+            margin: 20px;
+            background: white;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #333;
+        }
+
+        .company-name {
+     font-size: 14px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            padding-bottom: 3px;
+            border-bottom: 1px solid #333;
+        }
+
+        .simple-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        .simple-table th {
+            background: #f0f0f0;
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .simple-table td {
+            padding: 6px 8px;
+            border: 1px solid #ddd;
+        }
+
+        .amount {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+        }
+
+        .total-section {
+            background: #f8f8f8;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .net-salary {
+            font-size: 16px;
+            font-weight: bold;
+            border-top: 2px solid #333;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 10px;
+            text-align: center;
+            color: #666;
+        }
+
+        @media print {
+            body { margin: 10px; }
+            .header { margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="company-name">{{ company.nom }}</div>
+        <div class="payslip-title">BULLETIN DE PAIE</div>
+        <div>Période: {{ period.mois|stringformat:"02d" }}/{{ period.annee }}</div>
+    </div>
+
+    <div class="info-section">
+        <div class="info-row">
+            <span class="info-label">Employé:</span>
+            {{ employee.nom_complet }}
+        </div>
+        {% if employee.email %}
+        <div class="info-row">
+            <span class="info-label">Email:</span>
+            {{ employee.email }}
+        </div>
+        {% endif %}
+        {% if employee.numero_inss %}
+        <div class="info-row">
+            <span class="info-label">N° INSS:</span>
+            {{ employee.numero_inss }}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="section-title">Détail du Salaire</div>
+    <table class="simple-table">
+        <thead>
+            <tr>
+                <th>Composant</th>
+                <th>Montant (USD)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if salary_components.salaire_base %}
+            <tr>
+                <td>Salaire de Base</td>
+                <td class="amount">{{ salary_components.salaire_base|floatformat:2 }}</td>
+            </tr>
+            {% endif %}
+            {% if salary_components.indemnite_logement %}
+            <tr>
+                <td>Indemnité Logement</td>
+                <td class="amount">{{ salary_components.indemnite_logement|floatformat:2 }}</td>
+            </tr>
+            {% endif %}
+            {% if salary_components.allocation_familiale %}
+            <tr>
+                <td>Allocation Familiale</td>
+                <td class="amount">{{ salary_components.allocation_familiale|floatformat:2 }}</td>
+            </tr>
+            {% endif %}
+            {% if salary_components.autres_avantages %}
+            <tr>
+                <td>Autres Avantages</td>
+                <td class="amount">{{ salary_components.autres_avantages|floatformat:2 }}</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    {% if contributions.cotisations_salariales %}
+    <div class="section-title">Cotisations et Retenues</div>
+    <table class="simple-table">
+        <thead>
+            <tr>
+                <th>Désignation</th>
+                <th>Montant (USD)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in contributions.cotisations_salariales.items %}
+            <tr>
+                <td>{{ key|title }}</td>
+                <td class="amount">-{{ value|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+            {% for key, value in contributions.retenues_diverses.items %}
+            <tr>
+                <td>{{ key|title }}</td>
+                <td class="amount">-{{ value|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    <div class="total-section">
+        <div class="total-row">
+            <strong>Salaire Brut:</strong>
+            <strong>{{ salary_components.salaire_brut|floatformat:2 }} USD</strong>
+        </div>
+        {% if totals.total_charge_salariale %}
+        <div class="total-row">
+            <span>Total Retenues:</span>
+            <span>-{{ totals.total_charge_salariale|floatformat:2 }} USD</span>
+        </div>
+        {% endif %}
+        <div class="total-row net-salary">
+            <strong>SALAIRE NET:</strong>
+            <strong>{{ totals.salaire_net|floatformat:2 }} USD</strong>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Généré le {{ generated_at|date:"d/m/Y" }}</p>
+    </div>
+</body>
+</html>

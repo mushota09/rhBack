@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\migrations\0004_retenue_employe_modification_history.py
+# hypothesis_version: 6.151.2
+
+['modification_history', 'paie_app', 'retenue_employe']

@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\tasks.py
+# hypothesis_version: 6.151.2
+
+['ACTIVE', 'HIGH', 'LOW', 'PERIOD_PROCESSING', 'RESOLVED', 'completed', 'cutoff_date', 'deleted_alerts', 'emails_sent', 'employe_id', 'entree_paie_id', 'error', 'errors', 'excel', 'export_file', 'export_type', 'failed_calculations', 'failed_details', 'generated_payslips', 'hr@company.com', 'id', 'message', 'payslip_file', 'periode_id', 'processed_employees', 'processing_time', 'salary_data', 'status', 'success', 'task_id', 'total_amount', 'total_employees', 'total_payslips']

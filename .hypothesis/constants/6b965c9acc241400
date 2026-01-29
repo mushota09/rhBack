@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\modules\periode_paie\views.py
+# hypothesis_version: 6.151.2
+
+['-annee', '-created_at', '-mois', '0', 'APPROVED', 'Allocation Familiale', 'Content-Disposition', 'Cotisations', 'Email', 'Employé', 'FINALIZED', 'Indemnité Logement', 'N° INSS', 'Salaire Base', 'Salaire Brut', 'Salaire Net', 'annee', 'approve_period', 'center', 'created_at', 'employe_id', 'error', 'errors', 'get', 'list', 'message', 'mois', 'partial', 'periode', 'periode_id', 'periodes_par_statut', 'post', 'process_period', 'results', 'statut', 'success', 'total_net_a_payer', 'total_periodes', 'valid']

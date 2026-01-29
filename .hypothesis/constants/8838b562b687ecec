@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\modules\retenue_employe\views.py
+# hypothesis_version: 6.151.2
+
+['-created_at', 'Retenue non trouvée', 'action', 'ancien_etat', 'created_at', 'creation', 'cree_par', 'date', 'date_debut', 'date_desactivation', 'date_fin', 'deactivate', 'desactivation', 'description', 'employe', 'employe_id', 'employe_id__nom', 'employe_id__prenom', 'error', 'est_active', 'est_recurrente', 'etat_actuel', 'get', 'history', 'id', 'list', 'message', 'modification', 'modification_history', 'modifications', 'montant_deja_deduit', 'montant_mensuel', 'montant_total', 'nom_complet', 'nouveau_etat', 'par', 'post', 'raison', 'repartition_par_type', 'retenue_id', 'retenues_actives', 'retenues_inactives', 'total_retenues', 'type_retenue']

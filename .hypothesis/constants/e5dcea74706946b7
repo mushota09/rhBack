@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\conge_app\migrations\0001_initial.py
+# hypothesis_version: 6.151.2
+
+[100, '0001_initial', 'APPROVED', 'Annulé', 'Approuvé', 'CANCELLED', 'En attente', 'PENDING', 'REJECTED', 'Refusé', 'alloue', 'annee', 'approuve_par_id', 'cg_demande_conge', 'cg_historique_conge', 'cg_solde_conge', 'cg_type_conge', 'code', 'commentaire', 'conge_app.type_conge', 'conges_approuves', 'created_at', 'date_approbation', 'date_debut', 'date_fin', 'date_validation', 'db_table', 'demande_conge', 'demande_conge_id', 'demandes', 'demandes_conge', 'documents', 'employe_id', 'historique', 'historique_conge', 'id', 'nb_jours_max_par_an', 'nb_jours_total', 'necessite_validation', 'nom', 'poste_valideur_id', 'raison', 'report_autorise', 'reporte', 'restant', 'solde_conge', 'soldes', 'soldes_conge', 'statut', 'type_conge', 'type_conge_id', 'unique_together', 'updated_at', 'user_app', 'user_app.employe', 'user_app.poste', 'utilise']

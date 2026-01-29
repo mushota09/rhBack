@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\services\salary_calculator.py
+# hypothesis_version: 6.151.2
+
+[100, '0', '0.04', '0.2', '0.3', '10000', '15000', '150000', '18000', '3000', '30000', '300000', '5000', 'allocation_familiale', 'autre_avantage', 'autres_avantages', 'base_imposable', 'contrat_reference', 'cotisations', 'description', 'detail', 'employe_id', 'en_cours', 'fpc', 'indemnite_fonction', 'indemnite_logement', 'inss', 'inss_pension', 'inss_risque', 'ire', 'mfp', 'montant', 'patronales', 'periode_id', 'prime_fonction', 'retenues', 'retenues_diverses', 'salaire_base', 'salaire_brut', 'salaire_net', 'salariales', 'total']

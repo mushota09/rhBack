@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\services\payslip_generator.py
+# hypothesis_version: 6.151.2
+
+[b'PDF content placeholder', 'default', 'employe_id', 'entree_paie_id', 'html_content', 'pdf_size', 'periode_paie_id', 'success']

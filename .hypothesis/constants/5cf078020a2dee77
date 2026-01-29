@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\services\period_processor.py
+# hypothesis_version: 6.151.2
+
+['0', 'ACTIVE', 'APPROVED', 'COMPLETED', 'DRAFT', 'FINALIZED', 'PROCESSING', 'approuve_par', 'calculated_at', 'calculated_by_id', 'date_approbation', 'employe_id', 'employes_erreurs', 'employes_traites', 'en_cours', 'erreur', 'erreurs', 'nombre_employes', 'periode_id', 'salaire_base', 'salaire_brut', 'salaire_net', 'statut', 'total_net_a_payer', 'total_salaire_brut', 'total_salaire_net']

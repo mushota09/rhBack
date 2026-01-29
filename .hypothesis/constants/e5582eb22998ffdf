@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\conge_app\models.py
+# hypothesis_version: 6.151.2
+
+[100, 'APPROVED', 'Annulé', 'Approuvé', 'CANCELLED', 'En attente', 'PENDING', 'REJECTED', 'Refusé', 'annee', 'cg_demande_conge', 'cg_historique_conge', 'cg_solde_conge', 'cg_type_conge', 'code', 'conges_approuves', 'demandes', 'demandes_conge', 'employe_id', 'historique', 'nom', 'soldes', 'soldes_conge', 'type_conge_id']

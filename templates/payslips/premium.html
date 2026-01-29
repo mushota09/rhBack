@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulletin de Paie Premium - {{ period.mois }}/{{ period.annee }}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .payslip-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* En-tête avec gradient */
+        .header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+            color: white;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+0 140px;
+            text-align: right;
+        }
+
+        .logo-section img {
+            max-width: 140px;
+            max-height: 90px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Titre du bulletin */
+        .payslip-title {
+            background: linear-gradient(90deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 25px 30px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .payslip-title h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c5aa0;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .payslip-period {
+            font-size: 16px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 30px;
+        }
+
+        /* Cartes d'information */
+        .info-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #2c5aa0 0%, #1e3a8a 100%);
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c5aa0;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 4px 0;
+        }
+
+        .card-label {
+            font-weight: 500;
+            color: #475569;
+        }
+
+        .card-value {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* Tableaux modernes */
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin: 35px 0 20px 0;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c5aa0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, #2c5aa0 0%, transparent 100%);
+            margin-left: 20px;
+        }
+
+        .modern-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .modern-table thead {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+        }
+
+        .modern-table th {
+            color: white;
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modern-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 12px;
+        }
+
+        .modern-table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .modern-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .modern-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .amount-cell {
+            text-align: right;
+            font-weight: 600;
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+            font-size: 13px;
+        }
+
+        .positive-amount {
+            color: #059669;
+        }
+
+        .negative-amount {
+            color: #dc2626;
+        }
+
+        /* Section des totaux premium */
+        .totals-premium {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 35px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .totals-premium::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(14,165,233,0.05) 0%, transparent 70%);
+        }
+
+        .totals-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .total-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(14,165,233,0.1);
+        }
+
+        .total-item:last-child {
+            border-bottom: none;
+            margin-top: 20px;
+            padding-top: 25px;
+            border-top: 2px solid #0ea5e9;
+        }
+
+        .total-label {
+            font-weight: 600;
+            color: #0c4a6e;
+        }
+
+        .total-amount {
+            font-weight: 700;
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+            font-size: 15px;
+            color: #0c4a6e;
+        }
+
+        .net-salary-final {
+            font-size: 20px !important;
+            color: #059669 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* Pied de page premium */
+        .footer-premium {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 25px 30px;
+            margin-top: 35px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .generation-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .info-cards {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo-section {
+                margin-top: 20px;
+            }
+
+            .modern-table th,
+            .modern-table td {
+                padding: 10px 12px;
+                font-size: 11px;
+            }
+        }
+
+        /* Styles d'impression */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .payslip-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .header {
+                background: #2c5aa0 !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+
+            .modern-table thead {
+                background: #2c5aa0 !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="payslip-container">
+        <!-- En-tête premium -->
+        <div class="header">
+            <div class="header-content">
+                <div class="company-info">
+                    <div class="company-name">{{ company.nom }}</div>
+                    <div class="company-details">
+                        {% if company.adresse %}{{ company.adresse }}<br>{% endif %}
+                        {% if company.telephone %}📞 {{ company.telephone }}<br>{% endif %}
+                        {% if company.email %}✉️ {{ company.email }}{% endif %}
+                    </div>
+                </div>
+                <div class="logo-section">
+                    {% if company.logo %}
+                        <img src="{{ company.logo }}" alt="Logo {{ company.nom }}">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Titre -->
+        <div class="payslip-title">
+            <h1>BULLETIN DE PAIE</h1>
+            <div class="payslip-period">
+                📅 Période {{ period.mois|stringformat:"02d" }}/{{ period.annee }}
+                {% if period.date_debut and period.date_fin %}
+                    • {{ period.date_debut|date:"d/m/Y" }} → {{ period.date_fin|date:"d/m/Y" }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Cartes d'information -->
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="card-title">👤 Informations Employé</div>
+                    <div class="card-row">
+                        <span class="card-label">Nom complet</span>
+                        <span class="card-value">{{ employee.nom_complet }}</span>
+                    </div>
+                    {% if employee.email %}
+                    <div class="card-row">
+                        <span class="card-label">Email</span>
+                        <span class="card-value">{{ employee.email }}</span>
+                    </div>
+                    {% endif %}
+                    {% if employee.numero_inss %}
+                    <div class="card-row">
+                        <span class="card-label">N° INSS</span>
+                        <span class="card-value">{{ employee.numero_inss }}</span>
+                    </div>
+                    {% endif %}
+                    {% if employee.date_embauche %}
+                    <div class="card-row">
+                        <span class="card-label">Embauché le</span>
+                        <span class="card-value">{{ employee.date_embauche|date:"d/m/Y" }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="info-card">
+                    <div class="card-title">🏦 Informations Bancaires</div>
+                    {% if employee.banque %}
+                    <div class="card-row">
+                        <span class="card-label">Banque</span>
+                        <span class="card-value">{{ employee.banque }}</span>
+                    </div>
+                    {% endif %}
+                    {% if employee.numero_compte %}
+                    <div class="card-row">
+                        <span class="card-label">N° Compte</span>
+                        <span class="card-value">{{ employee.numero_compte }}</span>
+                    </div>
+                    {% endif %}
+                    {% if employee.nombre_enfants %}
+                    <div class="card-row">
+                        <span class="card-label">Enfants à charge</span>
+                        <span class="card-value">{{ employee.nombre_enfants }}</span>
+                    </div>
+                    {% endif %}
+                    {% if period.date_traitement %}
+                    <div class="card-row">
+                        <span class="card-label">Traité le</span>
+                        <span class="card-value">{{ period.date_traitement|date:"d/m/Y" }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Composants du salaire -->
+            <div class="section-header">
+                <div class="section-title">💰 Composants du Salaire</div>
+                <div class="section-line"></div>
+            </div>
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th>Désignation</th>
+                        <th style="text-align: right;">Montant (USD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if salary_components.salaire_base %}
+                    <tr>
+                        <td>💼 Salaire de Base</td>
+                        <td class="amount-cell positive-amount">{{ salary_components.salaire_base|floatformat:2 }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if salary_components.indemnite_logement %}
+                    <tr>
+                        <td>🏠 Indemnité de Logement</td>
+                        <td class="amount-cell positive-amount">{{ salary_components.indemnite_logement|floatformat:2 }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if salary_components.indemnite_deplacement %}
+                    <tr>
+                        <td>🚗 Indemnité de Déplacement</td>
+                        <td class="amount-cell positive-amount">{{ salary_components.indemnite_deplacement|floatformat:2 }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if salary_components.indemnite_fonction %}
+                    <tr>
+                        <td>⭐ Indemnité de Fonction</td>
+                        <td class="amount-cell positive-amount">{{ salary_components.indemnite_fonction|floatformat:2 }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if salary_components.allocation_familiale %}
+                    <tr>
+                        <td>👨‍👩‍👧‍👦 Allocation Familiale</td>
+                        <td class="amount-cell positive-amount">{{ salary_components.allocation_familiale|floatformat:2 }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if salary_components.autres_avantages %}
+                    <tr>
+                        <td>🎁 Autres Avantages</td>
+                        <td class="amount-cell positive-amount">{{ salary_components.autres_avantages|floatformat:2 }}</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+
+            <!-- Cotisations et retenues -->
+            {% if contributions.cotisations_salariales or contributions.retenues_diverses %}
+            <div class="section-header">
+                <div class="section-title">📊 Cotisations et Retenues</div>
+                <div class="section-line"></div>
+            </div>
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th>Désignation</th>
+                        <th style="text-align: right;">Montant (USD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, value in contributions.cotisations_salariales.items %}
+                    <tr>
+                        <td>
+                            🏛️
+                            {% if key == 'inss' %}INSS Employé
+                            {% elif key == 'mfp' %}MFP
+                            {% elif key == 'fpc' %}FPC
+                            {% else %}{{ key|title }}
+                            {% endif %}
+                        </td>
+                        <td class="amount-cell negative-amount">-{{ value|floatformat:2 }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% for key, value in contributions.retenues_diverses.items %}
+                    <tr>
+                        <td>
+                            📋
+                            {% if key == 'avance_salaire' %}Avance sur Salaire
+                            {% elif key == 'pret_entreprise' %}Prêt Entreprise
+                            {% elif key == 'ire' %}IRE
+                            {% else %}{{ key|title }}
+                            {% endif %}
+                        </td>
+                        <td class="amount-cell negative-amount">-{{ value|floatformat:2 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+
+            <!-- Totaux premium -->
+            <div class="totals-premium">
+                <div class="totals-content">
+                    <div class="total-item">
+                        <span class="total-label">💰 Salaire Brut</span>
+                        <span class="total-amount positive-amount">{{ salary_components.salaire_brut|floatformat:2 }} USD</span>
+                    </div>
+                    {% if totals.total_charge_salariale %}
+                    <div class="total-item">
+                        <span class="total-label">📉 Total Charges Salariales</span>
+                        <span class="total-amount negative-amount">-{{ totals.total_charge_salariale|floatformat:2 }} USD</span>
+                    </div>
+                    {% endif %}
+                    {% if totals.base_imposable %}
+                    <div class="total-item">
+                        <span class="total-label">📊 Base Imposable</span>
+                        <span class="total-amount">{{ totals.base_imposable|floatformat:2 }} USD</span>
+                    </div>
+                    {% endif %}
+                    <div class="total-item">
+                        <span class="total-label">💵 SALAIRE NET À PAYER</span>
+                        <span class="total-amount net-salary-final">{{ totals.salaire_net|floatformat:2 }} USD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pied de page premium -->
+        <div class="footer-premium">
+            <div class="footer-text">
+                Ce bulletin de paie est conforme à la réglementation en vigueur en République Démocratique du Congo.<br>
+                Conservez précieusement ce document pour vos démarches administratives.
+            </div>
+            <div class="generation-badge">
+                🕒 Généré le {{ generated_at|date:"d/m/Y" }}
+                {% if entree_id %} • Réf: {{ entree_id }}{% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

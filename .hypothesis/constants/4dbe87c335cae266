@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\migrations\0003_delete_passwordresetauditlog_delete_passwordresetotp.py
+# hypothesis_version: 6.151.2
+
+['PasswordResetOTP', 'user_app']

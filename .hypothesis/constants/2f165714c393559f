@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\modules\user\views.py
+# hypothesis_version: 6.151.2
+
+['-id', 'Refresh token requis', 'access_token', 'email', 'employe_id', 'employe_id.poste_id', 'employe_id__poste_id', 'error', 'id', 'message', 'password', 'refresh', 'refresh_token', 'user', 'user_id', 'username']

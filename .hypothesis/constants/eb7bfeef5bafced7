@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\modules\entree_paie\serializers.py
+# hypothesis_version: 6.151.2
+
+[100, '__all__', 'calculated_at', 'calculated_by', 'created_at', 'default', 'employe_nom_complet', 'id', 'payslip_file', 'payslip_generated', 'payslip_generated_at', 'periode_display', 'salaire_base', 'salaire_brut', 'salaire_net', 'updated_at', 'validated_at', 'validated_by']

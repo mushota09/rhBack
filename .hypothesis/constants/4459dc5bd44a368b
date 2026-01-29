@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\migrations\0002_passwordresetauditlog_passwordresetotp.py
+# hypothesis_version: 6.151.2
+
+[254, 255, '-created_at', '-timestamp', '0001_initial', 'EXPIRED', 'INVALID', 'Invalid OTP', 'OTP Expired', 'OTP Request', 'OTP Verification', 'Password Reset', 'PasswordResetOTP', 'RATE_LIMITED', 'REQUEST', 'RESET', 'Rate Limited', 'VERIFY', 'action', 'attempts', 'created_at', 'db_table', 'email', 'error_message', 'expires_at', 'id', 'indexes', 'ip_address', 'is_used', 'ordering', 'otp_hash', 'password_reset_otp', 'password_reset_otps', 'success', 'timestamp', 'user', 'user_agent', 'user_app', 'user_id']

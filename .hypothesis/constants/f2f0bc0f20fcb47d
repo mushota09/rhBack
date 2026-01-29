@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\rhBack\urls.py
+# hypothesis_version: 6.151.2
+
+['admin/', 'conge_app.urls', 'paie_app.urls', 'user_app.urls']

@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\constants.py
+# hypothesis_version: 6.151.2
+
+[0.0, 0.04, 0.06, 0.2, 0.3, 2400, 3000, 5000, 10000, 15000, 18000, 27000, 150000, 300000, 'INSS_EMPLOYEE_CAP', 'INSS_EMPLOYEE_RATE', 'INSS_PENSION_CAP', 'INSS_PENSION_RATE', 'INSS_RISK_CAP', 'INSS_RISK_RATE', 'IRE_BRACKETS', 'PAYROLL_CONSTANTS', 'amount', 'children', 'children_additional', 'inf', 'max', 'min', 'pension', 'rate', 'risk', 'total']
