@@ -19,7 +19,7 @@ REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 # ]
 
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["rapha.pythonanywhere.com","127.0.0.1"]
 
 # ************************* SECRET KEY *********************************
 SECRET_KEY = os.getenv("SECRET_KEY")
