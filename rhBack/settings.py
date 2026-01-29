@@ -244,11 +244,11 @@ DATABASES = {
 }
 
 # Use SQLite for tests to avoid PostgreSQL connection issues
-if 'test' in sys.argv:
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',
-    }
+# if 'test' in sys.argv:
+#     DATABASES['default'] = {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': ':memory:',
+#     }
 
 # DATABASES = {
 #     'default': {
