@@ -10,7 +10,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 CORS_ORIGIN_ALLOW_ALL = True
 
 # Redis configuration for Celery
-REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+#REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+REDIS_URL = os.getenv("REDIS_URL", "redis://:Rapha@1996...@31.97.217.126:6379/0")
+
 
 
 # CORS_ALLOWED_ORIGINS = [

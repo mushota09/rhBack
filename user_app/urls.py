@@ -3,7 +3,7 @@
 URL configuration for user_app
 """
 from adrf import routers
-from django.urls import path, include
+from django.urls import path
 from user_app.modules.user.views import (
     LoginView, ProtectedView, RefreshTokenView, userAPIView, LogoutView
 )
@@ -14,6 +14,9 @@ from user_app.modules.employe.views import employeAPIView
 from user_app.modules.document.views import documentAPIView
 from user_app.modules.audit_log.views import audit_logAPIView
 from user_app.modules.historique_contrat.views import historique_contratAPIView
+from user_app.modules.group.views import GroupViewSet
+from user_app.modules.user_group.views import UserGroupViewSet
+from user_app.modules.permission.views import GroupPermissionViewSet, PermissionViewSet
 
 router = routers.DefaultRouter()
 router.register("service", serviceAPIView, basename="serviceAPIView")
@@ -28,6 +31,10 @@ router.register(
     historique_contratAPIView,
     basename="historique_contratAPIView"
 )
+router.register("group", GroupViewSet, basename="GroupViewSet")
+router.register("user-group", UserGroupViewSet, basename="UserGroupViewSet")
+router.register("group-permission", GroupPermissionViewSet, basename="GroupPermissionViewSet")
+router.register("permission", PermissionViewSet, basename="PermissionViewSet")
 
 urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
