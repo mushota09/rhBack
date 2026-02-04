@@ -27,6 +27,7 @@ Bienvenue dans la documentation complète du système de gestion de paie. Cette 
 
 ### 📖 Référence
 - [API Documentation](reference/api-reference.md)
+- [Types TypeScript](reference/typescript-types.md)
 - [Glossaire](reference/glossary.md)
 - [FAQ](reference/faq.md)
 
