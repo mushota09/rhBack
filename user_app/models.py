@@ -1,9 +1,8 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import gettext_lazy as _
-from django.utils import timezone
-from asgiref.sync import sync_to_async
 import hashlib
 
 # ****************************************************************************************************************
@@ -371,6 +370,7 @@ class audit_log(models.Model):
         ('LOGOUT', 'Déconnexion'),
         ('VIEW', 'Voir'),
         ('EXPORT', 'Exporter'),
+        ('BULK_OPERATION', 'Opération en lot'),
     ]
 
     user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='audit_logs')
@@ -424,3 +424,111 @@ class document(Base_model):
 
     def __str__(self):
         return f"{self.employe_id.full_name} - {self.titre}"
+
+
+# *******************************************************************************************************
+# USER MANAGEMENT MODELS - RBAC SYSTEM
+# *******************************************************************************************************
+
+class Group(models.Model):
+    """
+    Organizational groups with specific roles and permissions.
+    Predefined groups: ADM, AP, AI, CSE, CH, CS, CSFP, CCI, CM, DIR, GS, IT, JR, LG, PL, PCA, PCR, PCDR, RAF, RRH, SEC
+    """
+    code = models.CharField(max_length=10, unique=True, help_text="Unique group code (e.g., ADM, RRH)")
+    name = models.CharField(max_length=255, help_text="Full group name")
+    description = models.TextField(blank=True, help_text="Description of the group's role and responsibilities")
+    is_active = models.BooleanField(default=True, help_text="Whether this group is currently active")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'user_management_group'
+        ordering = ['code']
+        verbose_name = 'Group'
+        verbose_name_plural = 'Groups'
+
+    def __str__(self):
+        return f"{self.code} - {self.name}"
+
+    @property
+    def user_count(self):
+        """Returns the number of users assigned to this group"""
+        return self.user_groups.filter(is_active=True).count()
+
+    @property
+    def permission_count(self):
+        """Returns the number of permissions assigned to this group"""
+        return self.group_permissions.filter(granted=True).count()
+
+
+class UserGroup(models.Model):
+    """
+    Many-to-many relationship between users and groups with additional metadata
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_groups')
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='user_groups')
+    assigned_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='assigned_user_groups')
+    assigned_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        db_table = 'user_management_user_group'
+        unique_together = ['user', 'group']
+        ordering = ['-assigned_at']
+        verbose_name = 'User Group Assignment'
+        verbose_name_plural = 'User Group Assignments'
+
+    def __str__(self):
+        return f"{self.user.email} -> {self.group.code}"
+
+
+class Permission(models.Model):
+    """
+    System permissions for controlling access to resources and actions
+    """
+    ACTION_CHOICES = [
+        ('CREATE', 'Create'),
+        ('READ', 'Read'),
+        ('UPDATE', 'Update'),
+        ('DELETE', 'Delete'),
+    ]
+
+    codename = models.CharField(max_length=100, unique=True, help_text="Unique permission identifier")
+    name = models.CharField(max_length=255, help_text="Human-readable permission name")
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, related_name='user_management_permissions', help_text="The model this permission applies to")
+    resource = models.CharField(max_length=100, help_text="Resource name (e.g., 'employee', 'payroll')")
+    action = models.CharField(max_length=50, choices=ACTION_CHOICES, help_text="Action type (CREATE, READ, UPDATE, DELETE)")
+    description = models.TextField(blank=True, help_text="Detailed description of what this permission allows")
+
+    class Meta:
+        db_table = 'user_management_permission'
+        unique_together = ['resource', 'action']
+        ordering = ['resource', 'action']
+        verbose_name = 'Permission'
+        verbose_name_plural = 'Permissions'
+
+    def __str__(self):
+        return f"{self.resource}.{self.action}"
+
+
+class GroupPermission(models.Model):
+    """
+    Many-to-many relationship between groups and permissions
+    """
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='group_permissions')
+    permission = models.ForeignKey(Permission, on_delete=models.CASCADE, related_name='group_permissions')
+    granted = models.BooleanField(default=True, help_text="Whether this permission is granted or denied")
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='created_group_permissions')
+
+    class Meta:
+        db_table = 'user_management_group_permission'
+        unique_together = ['group', 'permission']
+        ordering = ['group__code', 'permission__resource', 'permission__action']
+        verbose_name = 'Group Permission'
+        verbose_name_plural = 'Group Permissions'
+
+    def __str__(self):
+        status = "granted" if self.granted else "denied"
+        return f"{self.group.code} -> {self.permission} ({status})"

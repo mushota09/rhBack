@@ -12,3 +12,5 @@ INFO 2026-01-29 02:22:53,151 autoreload 2264 13624 Watching for file changes wit
 INFO 2026-01-29 02:22:53,151 autoreload 2264 13624 Watching for file changes with StatReloader
 INFO 2026-01-29 03:11:01,448 autoreload 6208 14212 Watching for file changes with StatReloader
 INFO 2026-01-29 03:11:01,448 autoreload 6208 14212 Watching for file changes with StatReloader
+WARNING 2026-02-03 14:01:46,816 log 41756 17092 Forbidden: /api/audit_log/
+WARNING 2026-02-03 14:01:46,816 log 41756 17092 Forbidden: /api/audit_log/
