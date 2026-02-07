@@ -167,8 +167,103 @@ interface User extends BaseModel {
   last_login?: string;
   date_joined: string;
   employe?: Employe;
+  groups?: Group[];
+  permissions?: Permission[];
 }
 ```
+
+### Group
+Interface pour la gestion des groupes d'utilisateurs:
+```typescript
+interface Group {
+  id: number;
+  code: string;
+  name: string;
+  description?: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+  user_count?: number;
+  permission_count?: number;
+}
+```
+
+### Permission
+Interface pour les permissions système:
+```typescript
+interface Permission {
+  id: number;
+  codename: string;
+  name: string;
+  content_type: number;
+  resource: string;
+  action: 'CREATE' | 'READ' | 'UPDATE' | 'DELETE';
+  description?: string;
+}
+```
+
+### UserGroup
+Interface pour les relations utilisateur-groupe:
+```typescript
+interface UserGroup {
+  id: number;
+  user: number;
+  group: number;
+  assigned_by?: number;
+  assigned_at: string;
+  is_active: boolean;
+  group_details?: Group;
+  user_details?: User;
+}
+```
+
+### GroupPermission
+Interface pour les permissions de groupe:
+```typescript
+interface GroupPermission {
+  id: number;
+  group: number;
+  permission: number;
+  granted: boolean;
+  created_at: string;
+  created_by?: number;
+  group_details?: Group;
+  permission_details?: Permission;
+}
+```
+```
+
+## Menu Access Types
+
+### Route
+Interface for individual menu routes:
+```typescript
+interface Route {
+  nom_route: string;  // Route display name
+  path: string;       // URL path for the route
+  collect: boolean;
+  create_flag: boolean | null;
+  update_flag: boolean | null;
+  delete_flag: boolean | null;
+}
+```
+
+### ModuleAccess
+Interface for menu modules with grouped routes:
+```typescript
+interface ModuleAccess {
+  module_descr: string;  // Module display name
+  path: string;          // Base path for the module
+  icon: string;          // Icon name for the module
+  routes: Route[];       // Array of routes within the module
+}
+```
+
+**Recent Updates (February 2026)**:
+- **AuthContext Integration**: Menu access now properly integrates with user permissions
+- **Dynamic Permission Checking**: Menu items show/hide based on actual user permissions
+- **Consistent Property Names**: Maintained `nom_route` and `module_descr` for compatibility
+- **Enhanced Security**: Menu access control now uses proper permission validation
 
 ## Audit et Traçabilité
 
@@ -272,6 +367,121 @@ const DOCUMENT_TYPE_OPTIONS = [
   { label: 'Certificat de formation', value: 'TRAINING' },
   { label: 'Autre', value: 'OTHER' },
 ];
+```
+
+## Service Layer Integration
+
+### API Service Methods
+
+The frontend provides comprehensive API service methods for all entities:
+
+#### User Management Services
+```typescript
+// Groups management
+export const groupService = {
+  getAll: (params?: Record<string, unknown>) => Promise<Group[]>,
+  getById: (id: number) => Promise<Group>,
+  create: (data: Partial<Group>) => Promise<Group>,
+  update: (id: number, data: Partial<Group>) => Promise<Group>,
+  delete: (id: number) => Promise<void>,
+  getActive: () => Promise<Group[]>,
+};
+
+// Permissions management (read-only)
+export const permissionService = {
+  getAll: (params?: Record<string, unknown>) => Promise<Permission[]>,
+  getById: (id: number) => Promise<Permission>,
+  getByResource: (resource: string) => Promise<Permission[]>,
+};
+
+// User-Group relationships
+export const userGroupService = {
+  getAll: (params?: Record<string, unknown>) => Promise<UserGroup[]>,
+  getById: (id: number) => Promise<UserGroup>,
+  create: (data: Partial<UserGroup>) => Promise<UserGroup>,
+  update: (id: number, data: Partial<UserGroup>) => Promise<UserGroup>,
+  delete: (id: number) => Promise<void>,
+  getByUser: (userId: number) => Promise<UserGroup[]>,
+  getByGroup: (groupId: number) => Promise<UserGroup[]>,
+  bulkAssign: (data: { group_id: number; user_ids: number[] }) => Promise<void>,
+};
+
+// Group permissions
+export const groupPermissionService = {
+  getAll: (params?: Record<string, unknown>) => Promise<GroupPermission[]>,
+  getById: (id: number) => Promise<GroupPermission>,
+  create: (data: Partial<GroupPermission>) => Promise<GroupPermission>,
+  update: (id: number, data: Partial<GroupPermission>) => Promise<GroupPermission>,
+  delete: (id: number) => Promise<void>,
+  getByGroup: (groupId: number) => Promise<GroupPermission[]>,
+  getByPermission: (permissionId: number) => Promise<GroupPermission[]>,
+};
+```
+
+#### React Hooks Usage
+```typescript
+// Group management
+const { groups, createGroup, updateGroup, deleteGroup, isLoading } = useGroups();
+
+// Permission queries with resource filtering
+const { permissions } = usePermissions('user_management');
+
+// User-group relationship management
+const { 
+  userGroups, 
+  assignUserToGroup, 
+  bulkAssignUsers, 
+  removeUserFromGroup,
+  isAssigning,
+  isBulkAssigning 
+} = useUserGroups(userId, groupId);
+
+// Group permission management
+const { 
+  groupPermissions, 
+  grantPermissionToGroup, 
+  updateGroupPermission,
+  revokePermissionFromGroup,
+  isGranting,
+  isRevoking 
+} = useGroupPermissions(groupId);
+
+// Complete user management
+const { users, createUser, updateUser, deleteUser } = useUsers();
+```
+
+#### HistoriqueContrat Service
+```typescript
+export const historiqueContratService = {
+  // Standard CRUD operations
+  getAll: (params?: Record<string, unknown>) => Promise<HistoriqueContrat[]>,
+  getById: (id: number) => Promise<HistoriqueContrat>,
+  create: (data: Partial<HistoriqueContrat>) => Promise<HistoriqueContrat>,
+  update: (id: number, data: Partial<HistoriqueContrat>) => Promise<HistoriqueContrat>,
+  delete: (id: number) => Promise<void>,
+  
+  // Specialized query methods
+  getByContrat: (contratId: number) => Promise<HistoriqueContrat[]>,
+  getByEmploye: (employeId: number) => Promise<HistoriqueContrat[]>,
+};
+```
+
+#### Service Usage Examples
+```typescript
+// Get all contract history for a specific contract
+const contractHistory = await historiqueContratService.getByContrat(contractId);
+
+// Get all contract history for an employee (across all their contracts)
+const employeeHistory = await historiqueContratService.getByEmploye(employeeId);
+
+// Create new contract history entry
+const newEntry = await historiqueContratService.create({
+  contrat_id: contractId,
+  date_modification: '2024-02-01',
+  ancien_salaire: 1800000,
+  nouveau_salaire: 2000000,
+  commentaire: 'Annual salary increase'
+});
 ```
 
 ## Utilisation des Types

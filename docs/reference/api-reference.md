@@ -330,6 +330,152 @@ DELETE /api/user_app/users/{id}/
         "nom": "MUKENDI",
         "prenom": "Jean",
         "matricule": "EMP001"
+    },
+    "groups": [
+        {
+            "id": 1,
+            "code": "RRH",
+            "name": "Ressources Humaines"
+        }
+    ],
+    "permissions": [
+        {
+            "id": 1,
+            "codename": "view_employe",
+            "name": "Can view employee",
+            "resource": "employe",
+            "action": "READ"
+        }
+    ]
+}
+```
+
+### Gestion des Groupes
+
+```http
+GET /api/user_app/groups/
+POST /api/user_app/groups/
+PUT /api/user_app/groups/{id}/
+DELETE /api/user_app/groups/{id}/
+```
+
+**Structure Group :**
+```json
+{
+    "id": 1,
+    "code": "RRH",
+    "name": "Ressources Humaines",
+    "description": "Groupe pour la gestion des ressources humaines",
+    "is_active": true,
+    "created_at": "2020-01-15T08:00:00Z",
+    "updated_at": "2024-02-01T10:30:00Z",
+    "user_count": 5,
+    "permission_count": 12
+}
+```
+
+### Gestion des Permissions
+
+```http
+GET /api/user_app/permissions/
+GET /api/user_app/permissions/{id}/
+```
+
+**Paramètres pour GET :**
+- `resource` (string) : Filtrer par type de ressource
+
+**Structure Permission :**
+```json
+{
+    "id": 1,
+    "codename": "view_employe",
+    "name": "Can view employee",
+    "content_type": 15,
+    "resource": "employe",
+    "action": "READ",
+    "description": "Permission to view employee records"
+}
+```
+
+### Relations Utilisateur-Groupe
+
+```http
+GET /api/user_app/user-groups/
+POST /api/user_app/user-groups/
+PUT /api/user_app/user-groups/{id}/
+DELETE /api/user_app/user-groups/{id}/
+GET /api/user_app/user-groups/by-user/{user_id}/
+GET /api/user_app/user-groups/by-group/{group_id}/
+POST /api/user_app/user-groups/bulk-assign/
+```
+
+**Structure UserGroup :**
+```json
+{
+    "id": 1,
+    "user": 1,
+    "group": 1,
+    "assigned_by": 2,
+    "assigned_at": "2024-02-01T10:30:00Z",
+    "is_active": true,
+    "group_details": {
+        "id": 1,
+        "code": "RRH",
+        "name": "Ressources Humaines"
+    },
+    "user_details": {
+        "id": 1,
+        "email": "admin@company.com",
+        "nom": "MUKENDI",
+        "prenom": "Jean"
+    }
+}
+```
+
+**Assignation en masse :**
+```http
+POST /api/user_app/user-groups/bulk-assign/
+Content-Type: application/json
+
+{
+    "group_id": 1,
+    "user_ids": [1, 2, 3, 4]
+}
+```
+
+### Permissions de Groupe
+
+```http
+GET /api/user_app/group-permissions/
+POST /api/user_app/group-permissions/
+PUT /api/user_app/group-permissions/{id}/
+DELETE /api/user_app/group-permissions/{id}/
+```
+
+**Paramètres pour GET :**
+- `group` (integer) : Filtrer par groupe
+- `permission` (integer) : Filtrer par permission
+
+**Structure GroupPermission :**
+```json
+{
+    "id": 1,
+    "group": 1,
+    "permission": 1,
+    "granted": true,
+    "created_at": "2024-02-01T10:30:00Z",
+    "created_by": 2,
+    "group_details": {
+        "id": 1,
+        "code": "RRH",
+        "name": "Ressources Humaines"
+    },
+    "permission_details": {
+        "id": 1,
+        "codename": "view_employe",
+        "name": "Can view employee",
+        "resource": "employe",
+        "action": "READ"
     }
 }
 ```
@@ -414,6 +560,19 @@ POST /api/user_app/historique-contrats/
         "type_contrat": "PERMANENT"
     }
 }
+```
+
+**Paramètres de requête pour GET :**
+- `contrat_id` (integer) : Filtrer par contrat spécifique
+- `contrat_id__employe_id` (integer) : Filtrer par employé (via contrat)
+
+**Exemples d'utilisation :**
+```http
+# Récupérer l'historique d'un contrat spécifique
+GET /api/user_app/historique-contrats/?contrat_id=1
+
+# Récupérer tout l'historique des contrats d'un employé
+GET /api/user_app/historique-contrats/?contrat_id__employe_id=123
 ```
 
 ## Périodes de Paie
