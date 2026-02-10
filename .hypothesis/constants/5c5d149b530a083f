@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\migrations\0004_add_user_management_models.py
+# hypothesis_version: 6.151.2
+
+[100, 255, '-assigned_at', 'CREATE', 'Create', 'DELETE', 'Delete', 'Full group name', 'Group', 'Group Permission', 'Group Permissions', 'GroupPermission', 'Groups', 'ID', 'Permission', 'Permissions', 'READ', 'Read', 'UPDATE', 'Update', 'UserGroup', 'action', 'assigned_at', 'assigned_by', 'assigned_user_groups', 'code', 'codename', 'content_type', 'contenttypes', 'created_at', 'created_by', 'db_table', 'description', 'granted', 'group', 'group__code', 'group_permissions', 'id', 'is_active', 'name', 'ordering', 'permission', 'permission__action', 'permission__resource', 'resource', 'unique_together', 'updated_at', 'user', 'user_app', 'user_app.group', 'user_app.permission', 'user_groups', 'verbose_name', 'verbose_name_plural']

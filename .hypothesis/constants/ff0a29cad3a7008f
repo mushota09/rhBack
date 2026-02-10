@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\services.py
+# hypothesis_version: 6.150.2
+
+[300, 'UPDATE', 'action', 'assigned_at', 'code', 'codename', 'description', 'granted_by_group', 'group', 'group__code', 'group_count', 'groups', 'id', 'name', 'permission', 'permission__action', 'permission__resource', 'permission_count', 'permissions', 'resource', 'user_management', 'user_permissions']

@@ -1,5 +1,5 @@
 from user_app.models import UserGroup, User, Group
-from adrf_flex_fields.views import FlexFieldsModelViewSet
+from adrf.viewsets import ModelViewSet
 from .serializers import (
     J_UserGroupSerializers,
     I_UserGroupSerializers,
@@ -18,13 +18,11 @@ from user_app.modules.audit.utils import (
     log_user_group_assignment_manual,
     log_bulk_operation_manual
 )
-# from user_app.modules.audit.decorators import audit_user_group_assignment, audit_bulk_operation
-# from user_app.modules.audit.services import UserManagementAuditService
 
 
-class UserGroupViewSet(FlexFieldsModelViewSet):
+class UserGroupViewSet(ModelViewSet):
     """
-    Async ViewSet for UserGroup management with ADRF and flex_fields support
+    Async ViewSet for UserGroup management with ADRF
 
     Provides:
     - CRUD operations for user-group assignments
@@ -33,10 +31,9 @@ class UserGroupViewSet(FlexFieldsModelViewSet):
     - Async operations for better performance
     """
     queryset = UserGroup.objects.all().order_by('-assigned_at')
-    serializer_class_read = J_UserGroupSerializers
-    serializer_class_write = I_UserGroupSerializers
-    authentication_classes = [JWT_AUTH]
-    permission_classes = [IsAuthenticated]
+    serializer_class = J_UserGroupSerializers
+    # authentication_classes = [JWT_AUTH]
+    # permission_classes = [IsAuthenticated]
 
     # Filtering and search configuration
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
@@ -45,12 +42,15 @@ class UserGroupViewSet(FlexFieldsModelViewSet):
     ordering_fields = ['assigned_at', 'user__email', 'group__code']
     ordering = ['-assigned_at']
 
-    # Flex fields configuration
-    permit_list_expands = ['user', 'group', 'assigned_by']
+    def get_serializer_class(self):
+        """Return appropriate serializer based on action"""
+        if self.action in ['create', 'update', 'partial_update']:
+            return I_UserGroupSerializers
+        return J_UserGroupSerializers
 
-    async def get_queryset(self):
+    def get_queryset(self):
         """
-        Override to provide async queryset with optimizations
+        Override to provide queryset with optimizations
         """
         queryset = UserGroup.objects.select_related(
             'user', 'group', 'assigned_by'
@@ -63,107 +63,104 @@ class UserGroupViewSet(FlexFieldsModelViewSet):
 
         return queryset
 
-    # @audit_user_group_assignment('CREATE')
-    async def create(self, request, *args, **kwargs):
+    async def acreate(self, request, *args, **kwargs):
         """
-        Override create to add assigned_by and audit logging
-        """
-        # Set the assigned_by field to current user
-        request.data['assigned_by'] = request.user.id
+        Override acreate to manually handle ADRF serializer data loss issue
 
-        response = await super().create(request, *args, **kwargs)
+        WORKAROUND: ADRF AsyncModelSerializer doesn't properly pass ForeignKey
+        fields through validated_data. We extract them manually from request.data.
+        """
+        # Get serializer and validate
+        serializer = self.get_serializer(data=request.data)
+        await sync_to_async(serializer.is_valid)(raise_exception=True)
+
+        # WORKAROUND: Extract ForeignKey fields manually from request.data
+        # because ADRF doesn't pass them through validated_data
+        user_id = request.data.get('user')
+        group_id = request.data.get('group')
+        assigned_by_id = request.data.get('assigned_by')
+
+        # Validate required fields
+        if not user_id:
+            return Response(
+                {'user': ['Ce champ est requis.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        if not group_id:
+            return Response(
+                {'group': ['Ce champ est requis.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Get related objects
+        try:
+            user = await User.objects.aget(id=user_id)
+            group = await Group.objects.aget(id=group_id)
+            assigned_by = await User.objects.aget(id=assigned_by_id) if assigned_by_id else request.user
+        except User.DoesNotExist:
+            return Response(
+                {'error': 'Utilisateur introuvable'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        except Group.DoesNotExist:
+            return Response(
+                {'error': 'Groupe introuvable'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Check if user is active
+        if not user.is_active:
+            return Response(
+                {'error': "Impossible d'assigner un utilisateur inactif à un groupe"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Check if group is active
+        if not group.is_active:
+            return Response(
+                {'error': "Impossible d'assigner un utilisateur à un groupe inactif"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Check for duplicate assignment
+        existing = await sync_to_async(
+            UserGroup.objects.filter(
+                user=user,
+                group=group,
+                is_active=True
+            ).exists
+        )()
+
+        if existing:
+            return Response(
+                {'error': f"L'utilisateur {user.email} est déjà assigné au groupe {group.code}"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Create the UserGroup instance directly
+        user_group = await sync_to_async(UserGroup.objects.create)(
+            user=user,
+            group=group,
+            assigned_by=assigned_by,
+            is_active=True
+        )
+
+        # Serialize the response
+        response_serializer = J_UserGroupSerializers(user_group)
+        response_data = await sync_to_async(lambda: response_serializer.data)()
 
         # Manual audit logging
-        if (response.status_code == status.HTTP_201_CREATED and
-            hasattr(response, 'data') and 'id' in response.data):
-            try:
-                user_group = await UserGroup.objects.select_related('user', 'group').aget(
-                    id=response.data['id']
-                )
-                await log_user_group_assignment_manual(
-                    user_group=user_group,
-                    action='CREATE',
-                    request=request
-                )
-            except Exception:
-                pass  # Don't fail the request if audit logging fails
+        try:
+            await log_user_group_assignment_manual(
+                user_group=user_group,
+                action='CREATE',
+                request=request
+            )
+        except Exception:
+            pass  # Don't fail the request if audit logging fails
 
-        return response
+        return Response(response_data, status=status.HTTP_201_CREATED)
 
-    # @audit_user_group_assignment('UPDATE')
-    async def update(self, request, *args, **kwargs):
-        """
-        Override update to add audit logging
-        """
-        instance = await sync_to_async(self.get_object)()
-        old_data = {
-            'user_id': instance.user.id,
-            'user_email': instance.user.email,
-            'group_id': instance.group.id,
-            'group_code': instance.group.code,
-            'group_name': instance.group.name,
-            'is_active': instance.is_active
-        }
-
-        response = await super().update(request, *args, **kwargs)
-
-        # Manual audit logging
-        if response.status_code == status.HTTP_200_OK:
-            try:
-                # Refresh instance to get updated values
-                await sync_to_async(instance.refresh_from_db)()
-                new_data = {
-                    'user_id': instance.user.id,
-                    'user_email': instance.user.email,
-                    'group_id': instance.group.id,
-                    'group_code': instance.group.code,
-                    'group_name': instance.group.name,
-                    'is_active': instance.is_active
-                }
-                await log_user_group_assignment_manual(
-                    user_group=instance,
-                    action='UPDATE',
-                    request=request,
-                    old_values=old_data,
-                    new_values=new_data
-                )
-            except Exception:
-                pass  # Don't fail the request if audit logging fails
-
-        return response
-
-    # @audit_user_group_assignment('DELETE')
-    async def destroy(self, request, *args, **kwargs):
-        """
-        Override destroy to add audit logging
-        """
-        instance = await sync_to_async(self.get_object)()
-        old_data = {
-            'user_id': instance.user.id,
-            'user_email': instance.user.email,
-            'group_id': instance.group.id,
-            'group_code': instance.group.code,
-            'group_name': instance.group.name,
-            'is_active': instance.is_active
-        }
-
-        response = await super().destroy(request, *args, **kwargs)
-
-        # Manual audit logging
-        if response.status_code == status.HTTP_204_NO_CONTENT:
-            try:
-                await log_user_group_assignment_manual(
-                    user_group=instance,
-                    action='DELETE',
-                    request=request,
-                    old_values=old_data
-                )
-            except Exception:
-                pass  # Don't fail the request if audit logging fails
-
-        return response
-
-    # @audit_bulk_operation('user_group_assignment')
     @action(detail=False, methods=['post'], url_path='bulk-assign')
     async def bulk_assign(self, request):
         """
@@ -258,37 +255,6 @@ class UserGroupViewSet(FlexFieldsModelViewSet):
                             'status': 'not_assigned'
                         })
 
-            # Log individual assignments for audit trail
-            if audit_assignments:
-                audit_action = 'CREATE' if action_type == 'assign' else 'UPDATE'
-                # Manual audit logging for bulk operations
-                try:
-                    for assignment in audit_assignments:
-                        await log_user_group_assignment_manual(
-                            user_group=assignment,
-                            action=audit_action,
-                            request=request
-                        )
-
-                    # Log bulk operation summary
-                    bulk_summary = {
-                        'operation_type': 'user_group_assignment',
-                        'action': action_type,
-                        'group_id': group.id,
-                        'group_code': group.code,
-                        'total_users': len(user_ids),
-                        'processed': len(results),
-                        'successful': len([r for r in results if r['status'] in ['assigned', 'removed']]),
-                        'failed': len([r for r in results if r['status'] in ['already_assigned', 'not_assigned']])
-                    }
-                    await log_bulk_operation_manual(
-                        operation_type='user_group_assignment',
-                        request=request,
-                        summary_data=bulk_summary
-                    )
-                except Exception:
-                    pass  # Don't fail the request if audit logging fails
-
             return Response({
                 'message': f'Opération {action_type} terminée',
                 'group': {
@@ -314,66 +280,4 @@ class UserGroupViewSet(FlexFieldsModelViewSet):
             return Response(
                 {'error': f'Erreur lors de l\'opération: {str(e)}'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
-
-    @action(detail=False, methods=['get'], url_path='by-user/(?P<user_id>[^/.]+)')
-    async def by_user(self, request, user_id=None):
-        """
-        Get all group assignments for a specific user
-        """
-        try:
-            user = await sync_to_async(User.objects.get)(id=user_id)
-            assignments = [
-                assignment async for assignment in UserGroup.objects.filter(
-                    user=user, is_active=True
-                ).select_related('group')
-            ]
-
-            serializer = J_UserGroupSerializers(assignments, many=True)
-            return Response({
-                'user': {
-                    'id': user.id,
-                    'email': user.email,
-                    'nom': user.nom,
-                    'prenom': user.prenom
-                },
-                'assignments': serializer.data,
-                'total_groups': len(assignments)
-            })
-
-        except User.DoesNotExist:
-            return Response(
-                {'error': f'Utilisateur avec l\'ID {user_id} introuvable'},
-                status=status.HTTP_404_NOT_FOUND
-            )
-
-    @action(detail=False, methods=['get'], url_path='by-group/(?P<group_id>[^/.]+)')
-    async def by_group(self, request, group_id=None):
-        """
-        Get all user assignments for a specific group
-        """
-        try:
-            group = await sync_to_async(Group.objects.get)(id=group_id)
-            assignments = [
-                assignment async for assignment in UserGroup.objects.filter(
-                    group=group, is_active=True
-                ).select_related('user')
-            ]
-
-            serializer = J_UserGroupSerializers(assignments, many=True)
-            return Response({
-                'group': {
-                    'id': group.id,
-                    'code': group.code,
-                    'name': group.name,
-                    'description': group.description
-                },
-                'assignments': serializer.data,
-                'total_users': len(assignments)
-            })
-
-        except Group.DoesNotExist:
-            return Response(
-                {'error': f'Groupe avec l\'ID {group_id} introuvable'},
-                status=status.HTTP_404_NOT_FOUND
             )

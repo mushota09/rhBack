@@ -1,16 +1,1060 @@
-INFO 2026-01-29 02:18:38,479 autoreload 13988 15132 Watching for file changes with StatReloader
-INFO 2026-01-29 02:18:38,479 autoreload 13988 15132 Watching for file changes with StatReloader
-INFO 2026-01-29 02:22:17,678 autoreload 8672 9844 Watching for file changes with StatReloader
-INFO 2026-01-29 02:22:17,678 autoreload 8672 9844 Watching for file changes with StatReloader
-INFO 2026-01-29 02:22:26,695 autoreload 8672 9844 D:\PROJETS\PYTHON_2\rhBack\paie_app\modules\periode_paie\views.py changed, reloading.
-INFO 2026-01-29 02:22:26,695 autoreload 8672 9844 D:\PROJETS\PYTHON_2\rhBack\paie_app\modules\periode_paie\views.py changed, reloading.
-INFO 2026-01-29 02:22:33,916 autoreload 14072 17296 Watching for file changes with StatReloader
-INFO 2026-01-29 02:22:33,916 autoreload 14072 17296 Watching for file changes with StatReloader
-INFO 2026-01-29 02:22:44,515 autoreload 14072 17296 D:\PROJETS\PYTHON_2\rhBack\paie_app\modules\periode_paie\views.py changed, reloading.
-INFO 2026-01-29 02:22:44,515 autoreload 14072 17296 D:\PROJETS\PYTHON_2\rhBack\paie_app\modules\periode_paie\views.py changed, reloading.
-INFO 2026-01-29 02:22:53,151 autoreload 2264 13624 Watching for file changes with StatReloader
-INFO 2026-01-29 02:22:53,151 autoreload 2264 13624 Watching for file changes with StatReloader
-INFO 2026-01-29 03:11:01,448 autoreload 6208 14212 Watching for file changes with StatReloader
-INFO 2026-01-29 03:11:01,448 autoreload 6208 14212 Watching for file changes with StatReloader
-WARNING 2026-02-03 14:01:46,816 log 41756 17092 Forbidden: /api/audit_log/
-WARNING 2026-02-03 14:01:46,816 log 41756 17092 Forbidden: /api/audit_log/
+WARNING 2026-02-08 04:19:04,135 log 12840 11284 Forbidden: /api/user/login/
+WARNING 2026-02-08 04:19:04,135 log 12840 11284 Forbidden: /api/user/login/
+ERROR 2026-02-08 04:22:45,712 log 1548 12992 Internal Server Error: /api/user/group-permission/214/
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 325, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 365, in main_wrap
+    result = await awaitable
+             ^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\viewsets.py", line 124, in async_view
+    return await self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 73, in async_dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 68, in async_dispatch
+    response = await handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\mixins.py", line 88, in partial_aupdate
+    return await self.aupdate(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\mixins.py", line 73, in aupdate
+    await self.perform_aupdate(serializer)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\mixins.py", line 84, in perform_aupdate
+    await serializer.asave()
+          ^^^^^^^^^^^^^^^^
+AttributeError: 'GroupPermissionReadSerializer' object has no attribute 'asave'. Did you mean: 'save'?
+ERROR 2026-02-08 04:22:45,712 log 1548 12992 Internal Server Error: /api/user/group-permission/214/
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 325, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 365, in main_wrap
+    result = await awaitable
+             ^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\viewsets.py", line 124, in async_view
+    return await self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 73, in async_dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 68, in async_dispatch
+    response = await handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\mixins.py", line 88, in partial_aupdate
+    return await self.aupdate(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\mixins.py", line 73, in aupdate
+    await self.perform_aupdate(serializer)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\mixins.py", line 84, in perform_aupdate
+    await serializer.asave()
+          ^^^^^^^^^^^^^^^^
+AttributeError: 'GroupPermissionReadSerializer' object has no attribute 'asave'. Did you mean: 'save'?
+ERROR 2026-02-08 04:24:33,936 log 15116 16348 Internal Server Error: /api/user/group-permission/218/
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 325, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 365, in main_wrap
+    result = await awaitable
+             ^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\viewsets.py", line 124, in async_view
+    return await self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 73, in async_dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 68, in async_dispatch
+    response = await handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\mixins.py", line 88, in partial_aupdate
+    return await self.aupdate(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\mixins.py", line 73, in aupdate
+    await self.perform_aupdate(serializer)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\mixins.py", line 84, in perform_aupdate
+    await serializer.asave()
+          ^^^^^^^^^^^^^^^^
+AttributeError: 'GroupPermissionWriteSerializer' object has no attribute 'asave'. Did you mean: 'save'?
+ERROR 2026-02-08 04:24:33,936 log 15116 16348 Internal Server Error: /api/user/group-permission/218/
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 325, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 365, in main_wrap
+    result = await awaitable
+             ^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\viewsets.py", line 124, in async_view
+    return await self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 73, in async_dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 68, in async_dispatch
+    response = await handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\mixins.py", line 88, in partial_aupdate
+    return await self.aupdate(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\mixins.py", line 73, in aupdate
+    await self.perform_aupdate(serializer)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\mixins.py", line 84, in perform_aupdate
+    await serializer.asave()
+          ^^^^^^^^^^^^^^^^
+AttributeError: 'GroupPermissionWriteSerializer' object has no attribute 'asave'. Did you mean: 'save'?
+INFO 2026-02-08 04:54:21,745 autoreload 14040 14544 Watching for file changes with StatReloader
+INFO 2026-02-08 04:54:21,745 autoreload 14040 14544 Watching for file changes with StatReloader
+INFO 2026-02-08 04:55:51,463 autoreload 5728 12596 Watching for file changes with StatReloader
+INFO 2026-02-08 04:55:51,463 autoreload 5728 12596 Watching for file changes with StatReloader
+WARNING 2026-02-08 04:58:19,734 log 5728 12080 Unauthorized: /api/user/login/
+WARNING 2026-02-08 04:58:19,734 log 5728 12080 Unauthorized: /api/user/login/
+WARNING 2026-02-08 04:58:19,734 basehttp 5728 12080 "POST /api/user/login/ HTTP/1.1" 401 66
+WARNING 2026-02-08 04:58:19,734 basehttp 5728 12080 "POST /api/user/login/ HTTP/1.1" 401 66
+WARNING 2026-02-08 04:58:42,619 log 5728 11628 Unauthorized: /api/user/login/
+WARNING 2026-02-08 04:58:42,619 log 5728 11628 Unauthorized: /api/user/login/
+WARNING 2026-02-08 04:58:42,619 basehttp 5728 11628 "POST /api/user/login/ HTTP/1.1" 401 66
+WARNING 2026-02-08 04:58:42,619 basehttp 5728 11628 "POST /api/user/login/ HTTP/1.1" 401 66
+ERROR 2026-02-08 05:00:16,058 log 5728 1708 Internal Server Error: /api/user/login/
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 279, in ensure_connection
+    self.connect()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\postgresql\base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\connection.py", line 100, in connect
+    attempts = conninfo_attempts(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\_conninfo_attempts.py", line 55, in conninfo_attempts
+    raise last_exc
+psycopg.OperationalError: failed to resolve host 'ep-tiny-sound-agslibpd-pooler.c-2.eu-central-1.aws.neon.tech': [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 325, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 365, in main_wrap
+    result = await awaitable
+             ^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\views\decorators\csrf.py", line 60, in _view_wrapper
+    return await view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 73, in async_dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 68, in async_dispatch
+    response = await handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\user_app\modules\user\views.py", line 157, in post
+    user = await User.objects.aget(email=email)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 645, in aget
+    return await sync_to_async(self.get)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 504, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 559, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 629, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 366, in __len__
+    self._fetch_all()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 1935, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1620, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 320, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 296, in _cursor
+    self.ensure_connection()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 278, in ensure_connection
+    with self.wrap_database_errors:
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 279, in ensure_connection
+    self.connect()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\postgresql\base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\connection.py", line 100, in connect
+    attempts = conninfo_attempts(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\_conninfo_attempts.py", line 55, in conninfo_attempts
+    raise last_exc
+django.db.utils.OperationalError: failed to resolve host 'ep-tiny-sound-agslibpd-pooler.c-2.eu-central-1.aws.neon.tech': [Errno 11001] getaddrinfo failed
+ERROR 2026-02-08 05:00:16,058 log 5728 1708 Internal Server Error: /api/user/login/
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 279, in ensure_connection
+    self.connect()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\postgresql\base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\connection.py", line 100, in connect
+    attempts = conninfo_attempts(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\_conninfo_attempts.py", line 55, in conninfo_attempts
+    raise last_exc
+psycopg.OperationalError: failed to resolve host 'ep-tiny-sound-agslibpd-pooler.c-2.eu-central-1.aws.neon.tech': [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 325, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 365, in main_wrap
+    result = await awaitable
+             ^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\views\decorators\csrf.py", line 60, in _view_wrapper
+    return await view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 73, in async_dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 68, in async_dispatch
+    response = await handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\user_app\modules\user\views.py", line 157, in post
+    user = await User.objects.aget(email=email)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 645, in aget
+    return await sync_to_async(self.get)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 504, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 559, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 629, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 366, in __len__
+    self._fetch_all()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 1935, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1620, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 320, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 296, in _cursor
+    self.ensure_connection()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 278, in ensure_connection
+    with self.wrap_database_errors:
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 279, in ensure_connection
+    self.connect()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\postgresql\base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\connection.py", line 100, in connect
+    attempts = conninfo_attempts(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\_conninfo_attempts.py", line 55, in conninfo_attempts
+    raise last_exc
+django.db.utils.OperationalError: failed to resolve host 'ep-tiny-sound-agslibpd-pooler.c-2.eu-central-1.aws.neon.tech': [Errno 11001] getaddrinfo failed
+ERROR 2026-02-08 05:00:32,109 log 5728 14296 Internal Server Error: /api/user/login/
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 279, in ensure_connection
+    self.connect()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\postgresql\base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\connection.py", line 100, in connect
+    attempts = conninfo_attempts(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\_conninfo_attempts.py", line 55, in conninfo_attempts
+    raise last_exc
+psycopg.OperationalError: failed to resolve host 'ep-tiny-sound-agslibpd-pooler.c-2.eu-central-1.aws.neon.tech': [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 325, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 365, in main_wrap
+    result = await awaitable
+             ^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\views\decorators\csrf.py", line 60, in _view_wrapper
+    return await view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 73, in async_dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 68, in async_dispatch
+    response = await handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\user_app\modules\user\views.py", line 157, in post
+    user = await User.objects.aget(email=email)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 645, in aget
+    return await sync_to_async(self.get)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 504, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 559, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 629, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 366, in __len__
+    self._fetch_all()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 1935, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1620, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 320, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 296, in _cursor
+    self.ensure_connection()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 278, in ensure_connection
+    with self.wrap_database_errors:
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 279, in ensure_connection
+    self.connect()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\postgresql\base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\connection.py", line 100, in connect
+    attempts = conninfo_attempts(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\_conninfo_attempts.py", line 55, in conninfo_attempts
+    raise last_exc
+django.db.utils.OperationalError: failed to resolve host 'ep-tiny-sound-agslibpd-pooler.c-2.eu-central-1.aws.neon.tech': [Errno 11001] getaddrinfo failed
+ERROR 2026-02-08 05:00:32,109 log 5728 14296 Internal Server Error: /api/user/login/
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 279, in ensure_connection
+    self.connect()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\postgresql\base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\connection.py", line 100, in connect
+    attempts = conninfo_attempts(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\_conninfo_attempts.py", line 55, in conninfo_attempts
+    raise last_exc
+psycopg.OperationalError: failed to resolve host 'ep-tiny-sound-agslibpd-pooler.c-2.eu-central-1.aws.neon.tech': [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 325, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 365, in main_wrap
+    result = await awaitable
+             ^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\views\decorators\csrf.py", line 60, in _view_wrapper
+    return await view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 73, in async_dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 68, in async_dispatch
+    response = await handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\user_app\modules\user\views.py", line 157, in post
+    user = await User.objects.aget(email=email)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 645, in aget
+    return await sync_to_async(self.get)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 504, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 559, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 629, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 366, in __len__
+    self._fetch_all()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 1935, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1620, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 320, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 296, in _cursor
+    self.ensure_connection()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 278, in ensure_connection
+    with self.wrap_database_errors:
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 279, in ensure_connection
+    self.connect()
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\base\base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\db\backends\postgresql\base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\connection.py", line 100, in connect
+    attempts = conninfo_attempts(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\psycopg\_conninfo_attempts.py", line 55, in conninfo_attempts
+    raise last_exc
+django.db.utils.OperationalError: failed to resolve host 'ep-tiny-sound-agslibpd-pooler.c-2.eu-central-1.aws.neon.tech': [Errno 11001] getaddrinfo failed
+INFO 2026-02-08 05:00:48,588 autoreload 2572 9352 Watching for file changes with StatReloader
+INFO 2026-02-08 05:00:48,588 autoreload 2572 9352 Watching for file changes with StatReloader
+INFO 2026-02-08 05:01:22,321 autoreload 11224 10184 Watching for file changes with StatReloader
+INFO 2026-02-08 05:01:22,321 autoreload 11224 10184 Watching for file changes with StatReloader
+WARNING 2026-02-08 05:01:41,108 log 11224 3068 Unauthorized: /api/user/login/
+WARNING 2026-02-08 05:01:41,108 log 11224 3068 Unauthorized: /api/user/login/
+WARNING 2026-02-08 05:01:41,108 basehttp 11224 3068 "POST /api/user/login/ HTTP/1.1" 401 34
+WARNING 2026-02-08 05:01:41,108 basehttp 11224 3068 "POST /api/user/login/ HTTP/1.1" 401 34
+WARNING 2026-02-08 05:02:14,131 log 11224 15140 Unauthorized: /api/user/login/
+WARNING 2026-02-08 05:02:14,131 log 11224 15140 Unauthorized: /api/user/login/
+WARNING 2026-02-08 05:02:14,131 basehttp 11224 15140 "POST /api/user/login/ HTTP/1.1" 401 34
+WARNING 2026-02-08 05:02:14,131 basehttp 11224 15140 "POST /api/user/login/ HTTP/1.1" 401 34
+INFO 2026-02-08 05:06:26,793 basehttp 11224 12436 "POST /api/user/login/ HTTP/1.1" 200 435
+INFO 2026-02-08 05:06:26,793 basehttp 11224 12436 "POST /api/user/login/ HTTP/1.1" 200 435
+INFO 2026-02-08 05:08:29,057 basehttp 11224 9148 "GET /api/user/ HTTP/1.1" 200 235
+INFO 2026-02-08 05:08:29,057 basehttp 11224 9148 "GET /api/user/ HTTP/1.1" 200 235
+WARNING 2026-02-08 05:09:16,157 log 11224 16776 Forbidden: /api/user/
+WARNING 2026-02-08 05:09:16,157 log 11224 16776 Forbidden: /api/user/
+WARNING 2026-02-08 05:09:16,157 basehttp 11224 16776 "GET /api/user/ HTTP/1.1" 403 58
+WARNING 2026-02-08 05:09:16,157 basehttp 11224 16776 "GET /api/user/ HTTP/1.1" 403 58
+INFO 2026-02-08 05:09:30,071 basehttp 11224 7484 "GET /api/user/ HTTP/1.1" 200 235
+INFO 2026-02-08 05:09:30,071 basehttp 11224 7484 "GET /api/user/ HTTP/1.1" 200 235
+INFO 2026-02-08 05:10:19,196 basehttp 11224 14628 "GET /api/user/group/ HTTP/1.1" 200 1358
+INFO 2026-02-08 05:10:19,196 basehttp 11224 14628 "GET /api/user/group/ HTTP/1.1" 200 1358
+INFO 2026-02-08 05:11:39,127 basehttp 11224 13200 "GET /api/user/group/ HTTP/1.1" 200 1358
+INFO 2026-02-08 05:11:39,127 basehttp 11224 13200 "GET /api/user/group/ HTTP/1.1" 200 1358
+INFO 2026-02-08 05:16:18,415 basehttp 11224 7176 "GET /api/user/group/ HTTP/1.1" 200 1358
+INFO 2026-02-08 05:16:18,415 basehttp 11224 7176 "GET /api/user/group/ HTTP/1.1" 200 1358
+INFO 2026-02-08 05:17:55,138 basehttp 11224 12632 "GET /api/user/group/ HTTP/1.1" 200 1358
+INFO 2026-02-08 05:17:55,138 basehttp 11224 12632 "GET /api/user/group/ HTTP/1.1" 200 1358
+INFO 2026-02-08 05:18:51,058 basehttp 11224 17068 "GET /api/user/group/ HTTP/1.1" 200 1358
+INFO 2026-02-08 05:18:51,058 basehttp 11224 17068 "GET /api/user/group/ HTTP/1.1" 200 1358
+WARNING 2026-02-08 05:19:34,128 log 11224 9588 Not Found: /api/user/user_group/
+WARNING 2026-02-08 05:19:34,128 log 11224 9588 Not Found: /api/user/user_group/
+WARNING 2026-02-08 05:19:34,144 basehttp 11224 9588 "GET /api/user/user_group/ HTTP/1.1" 404 33618
+WARNING 2026-02-08 05:19:34,144 basehttp 11224 9588 "GET /api/user/user_group/ HTTP/1.1" 404 33618
+INFO 2026-02-08 05:20:58,937 basehttp 11224 11416 "GET /api/user/user-group/ HTTP/1.1" 200 162
+INFO 2026-02-08 05:20:58,937 basehttp 11224 11416 "GET /api/user/user-group/ HTTP/1.1" 200 162
+WARNING 2026-02-08 05:21:49,718 log 11224 10220 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:21:49,718 log 11224 10220 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:21:49,718 basehttp 11224 10220 "GET /api/user/user-group/?expand=assigned_by HTTP/1.1" 403 27
+WARNING 2026-02-08 05:21:49,718 basehttp 11224 10220 "GET /api/user/user-group/?expand=assigned_by HTTP/1.1" 403 27
+WARNING 2026-02-08 05:21:58,646 log 11224 7844 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:21:58,646 log 11224 7844 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:21:58,646 basehttp 11224 7844 "GET /api/user/user-group/?expand=assigned_by HTTP/1.1" 403 27
+WARNING 2026-02-08 05:21:58,646 basehttp 11224 7844 "GET /api/user/user-group/?expand=assigned_by HTTP/1.1" 403 27
+WARNING 2026-02-08 05:22:11,139 log 11224 12276 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:22:11,139 log 11224 12276 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:22:11,139 basehttp 11224 12276 "GET /api/user/user-group/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:22:11,139 basehttp 11224 12276 "GET /api/user/user-group/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:23:12,915 log 11224 16240 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:23:12,915 log 11224 16240 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:23:12,918 basehttp 11224 16240 "GET /api/user/user-group/ HTTP/1.1" 403 9987
+WARNING 2026-02-08 05:23:12,918 basehttp 11224 16240 "GET /api/user/user-group/ HTTP/1.1" 403 9987
+INFO 2026-02-08 05:23:13,747 basehttp 11224 4972 "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3426
+INFO 2026-02-08 05:23:13,747 basehttp 11224 4972 "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3426
+INFO 2026-02-08 05:23:14,267 basehttp 11224 10804 "GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+INFO 2026-02-08 05:23:14,267 basehttp 11224 10804 "GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+INFO 2026-02-08 05:23:14,704 basehttp 11224 14924 "GET /static/rest_framework/css/default.css HTTP/1.1" 200 1152
+INFO 2026-02-08 05:23:14,704 basehttp 11224 14924 "GET /static/rest_framework/css/default.css HTTP/1.1" 200 1152
+INFO 2026-02-08 05:23:15,624 basehttp 11224 16240 "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121457
+INFO 2026-02-08 05:23:15,624 basehttp 11224 16240 "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121457
+INFO 2026-02-08 05:23:21,192 basehttp 11224 16240 "GET /static/rest_framework/js/default.js HTTP/1.1" 200 1268
+INFO 2026-02-08 05:23:21,192 basehttp 11224 16240 "GET /static/rest_framework/js/default.js HTTP/1.1" 200 1268
+INFO 2026-02-08 05:23:21,308 basehttp 11224 16240 "GET /static/rest_framework/js/load-ajax-form.js HTTP/1.1" 200 59
+INFO 2026-02-08 05:23:21,308 basehttp 11224 16240 "GET /static/rest_framework/js/load-ajax-form.js HTTP/1.1" 200 59
+INFO 2026-02-08 05:23:21,640 basehttp 11224 17084 "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3796
+INFO 2026-02-08 05:23:21,640 basehttp 11224 17084 "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3796
+INFO 2026-02-08 05:23:21,700 basehttp 11224 4972 "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1793
+INFO 2026-02-08 05:23:21,700 basehttp 11224 4972 "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1793
+INFO 2026-02-08 05:23:22,286 basehttp 11224 10804 "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 39680
+INFO 2026-02-08 05:23:22,286 basehttp 11224 10804 "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 39680
+INFO 2026-02-08 05:23:23,191 basehttp 11224 16500 "GET /static/rest_framework/js/jquery-3.7.1.min.js HTTP/1.1" 200 87533
+INFO 2026-02-08 05:23:23,191 basehttp 11224 16500 "GET /static/rest_framework/js/jquery-3.7.1.min.js HTTP/1.1" 200 87533
+INFO 2026-02-08 05:23:23,412 basehttp 11224 14924 "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+INFO 2026-02-08 05:23:23,412 basehttp 11224 14924 "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+INFO 2026-02-08 05:23:23,577 basehttp 11224 16240 "GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+INFO 2026-02-08 05:23:23,577 basehttp 11224 16240 "GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+WARNING 2026-02-08 05:23:23,792 log 11224 16240 Not Found: /favicon.ico
+WARNING 2026-02-08 05:23:23,792 log 11224 16240 Not Found: /favicon.ico
+WARNING 2026-02-08 05:23:23,792 basehttp 11224 16240 "GET /favicon.ico HTTP/1.1" 404 3488
+WARNING 2026-02-08 05:23:23,792 basehttp 11224 16240 "GET /favicon.ico HTTP/1.1" 404 3488
+WARNING 2026-02-08 05:23:37,594 log 11224 6236 Not Found: /
+WARNING 2026-02-08 05:23:37,594 log 11224 6236 Not Found: /
+WARNING 2026-02-08 05:23:37,598 basehttp 11224 6236 "GET / HTTP/1.1" 404 3437
+WARNING 2026-02-08 05:23:37,598 basehttp 11224 6236 "GET / HTTP/1.1" 404 3437
+WARNING 2026-02-08 05:23:46,843 log 11224 14832 Forbidden: /api/
+WARNING 2026-02-08 05:23:46,843 log 11224 14832 Forbidden: /api/
+WARNING 2026-02-08 05:23:46,843 basehttp 11224 14832 "GET /api/ HTTP/1.1" 403 9660
+WARNING 2026-02-08 05:23:46,843 basehttp 11224 14832 "GET /api/ HTTP/1.1" 403 9660
+WARNING 2026-02-08 05:27:52,391 log 11224 12908 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:27:52,391 log 11224 12908 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:27:52,391 basehttp 11224 12908 "GET /api/user/user-group/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:27:52,391 basehttp 11224 12908 "GET /api/user/user-group/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:28:02,957 log 11224 9880 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:28:02,957 log 11224 9880 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:28:02,973 basehttp 11224 9880 "GET /api/user/user-group/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:28:02,973 basehttp 11224 9880 "GET /api/user/user-group/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:28:24,192 log 11224 7988 Forbidden: /api/user/group/
+WARNING 2026-02-08 05:28:24,192 log 11224 7988 Forbidden: /api/user/group/
+WARNING 2026-02-08 05:28:24,192 basehttp 11224 7988 "GET /api/user/group/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:28:24,192 basehttp 11224 7988 "GET /api/user/group/ HTTP/1.1" 403 27
+INFO 2026-02-08 05:29:00,960 autoreload 11224 10184 D:\PROJETS\PYTHON_2\rhBack\utilities\jwt_utils.py changed, reloading.
+INFO 2026-02-08 05:29:00,960 autoreload 11224 10184 D:\PROJETS\PYTHON_2\rhBack\utilities\jwt_utils.py changed, reloading.
+INFO 2026-02-08 05:29:21,662 autoreload 7884 8776 Watching for file changes with StatReloader
+INFO 2026-02-08 05:29:21,662 autoreload 7884 8776 Watching for file changes with StatReloader
+WARNING 2026-02-08 05:30:00,331 log 7884 9132 Forbidden: /api/user/group/
+WARNING 2026-02-08 05:30:00,331 log 7884 9132 Forbidden: /api/user/group/
+WARNING 2026-02-08 05:30:00,332 basehttp 7884 9132 "GET /api/user/group/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:30:00,332 basehttp 7884 9132 "GET /api/user/group/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:30:12,465 log 7884 13780 Forbidden: /api/user/group/
+WARNING 2026-02-08 05:30:12,465 log 7884 13780 Forbidden: /api/user/group/
+WARNING 2026-02-08 05:30:12,468 basehttp 7884 13780 "GET /api/user/group/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:30:12,468 basehttp 7884 13780 "GET /api/user/group/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:31:06,370 log 7884 14768 Forbidden: /api/user/login/
+WARNING 2026-02-08 05:31:06,370 log 7884 14768 Forbidden: /api/user/login/
+WARNING 2026-02-08 05:31:06,370 basehttp 7884 14768 "GET /api/user/login/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:31:06,370 basehttp 7884 14768 "GET /api/user/login/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:31:17,273 log 7884 8388 Forbidden: /api/user/login/
+WARNING 2026-02-08 05:31:17,273 log 7884 8388 Forbidden: /api/user/login/
+WARNING 2026-02-08 05:31:17,273 basehttp 7884 8388 "GET /api/user/login/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:31:17,273 basehttp 7884 8388 "GET /api/user/login/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:31:24,221 log 7884 15544 Forbidden: /api/user/login/
+WARNING 2026-02-08 05:31:24,221 log 7884 15544 Forbidden: /api/user/login/
+WARNING 2026-02-08 05:31:24,221 basehttp 7884 15544 "POST /api/user/login/ HTTP/1.1" 403 27
+WARNING 2026-02-08 05:31:24,221 basehttp 7884 15544 "POST /api/user/login/ HTTP/1.1" 403 27
+INFO 2026-02-08 05:31:57,684 basehttp 7884 10688 "POST /api/user/login/ HTTP/1.1" 200 435
+INFO 2026-02-08 05:31:57,684 basehttp 7884 10688 "POST /api/user/login/ HTTP/1.1" 200 435
+WARNING 2026-02-08 05:33:29,777 log 7884 9088 Bad Request: /api/user/user-group/
+WARNING 2026-02-08 05:33:29,777 log 7884 9088 Bad Request: /api/user/user-group/
+WARNING 2026-02-08 05:33:29,777 basehttp 7884 9088 "POST /api/user/user-group/ HTTP/1.1" 400 33
+WARNING 2026-02-08 05:33:29,777 basehttp 7884 9088 "POST /api/user/user-group/ HTTP/1.1" 400 33
+INFO 2026-02-08 05:33:39,711 basehttp 7884 15408 "GET /api/user/user-group/ HTTP/1.1" 200 162
+INFO 2026-02-08 05:33:39,711 basehttp 7884 15408 "GET /api/user/user-group/ HTTP/1.1" 200 162
+ERROR 2026-02-08 05:34:43,832 log 7884 3560 Internal Server Error: /api/user/permission/
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\connection.py", line 2596, in get_connection
+    connection = self._available_connections.pop()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from empty list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 325, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 365, in main_wrap
+    result = await awaitable
+             ^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\viewsets.py", line 124, in async_view
+    return await self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 73, in async_dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 57, in async_dispatch
+    await sync_to_async(self.initial)(request, *args, **kwargs)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 504, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 559, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 421, in initial
+    self.check_permissions(request)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 117, in check_permissions
+    async_to_sync(self.check_async_permissions)(request, async_permissions)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 325, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 365, in main_wrap
+    result = await awaitable
+             ^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 137, in check_async_permissions
+    raise has_permission
+  File "D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\permissions.py", line 171, in has_permission
+    return await PermissionService.check_permission(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\services.py", line 81, in check_permission
+    user_permissions = await cls.get_user_permissions(user)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\services.py", line 35, in get_user_permissions
+    cached_permissions = cache.get(cache_key)
+                         ^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\cache\backends\redis.py", line 188, in get
+    return self._cache.get(key, default)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\cache\backends\redis.py", line 100, in get
+    value = client.get(key)
+            ^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\commands\core.py", line 1923, in get
+    return self.execute_command("GET", name, keys=[name])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\client.py", line 657, in execute_command
+    return self._execute_command(*args, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\client.py", line 663, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\utils.py", line 196, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\connection.py", line 2598, in get_connection
+    connection = self.make_connection()
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\connection.py", line 2648, in make_connection
+    return self.connection_class(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\connection.py", line 1255, in __init__
+    super().__init__(**kwargs)
+TypeError: AbstractConnection.__init__() got an unexpected keyword argument 'CLIENT_CLASS'
+ERROR 2026-02-08 05:34:43,832 log 7884 3560 Internal Server Error: /api/user/permission/
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\connection.py", line 2596, in get_connection
+    connection = self._available_connections.pop()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from empty list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 325, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 365, in main_wrap
+    result = await awaitable
+             ^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\viewsets.py", line 124, in async_view
+    return await self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 73, in async_dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 57, in async_dispatch
+    await sync_to_async(self.initial)(request, *args, **kwargs)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 504, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 559, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\rest_framework\views.py", line 421, in initial
+    self.check_permissions(request)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 117, in check_permissions
+    async_to_sync(self.check_async_permissions)(request, async_permissions)
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 325, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\NKS\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\asgiref\sync.py", line 365, in main_wrap
+    result = await awaitable
+             ^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\adrf\views.py", line 137, in check_async_permissions
+    raise has_permission
+  File "D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\permissions.py", line 171, in has_permission
+    return await PermissionService.check_permission(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\services.py", line 81, in check_permission
+    user_permissions = await cls.get_user_permissions(user)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\services.py", line 35, in get_user_permissions
+    cached_permissions = cache.get(cache_key)
+                         ^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\cache\backends\redis.py", line 188, in get
+    return self._cache.get(key, default)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\django\core\cache\backends\redis.py", line 100, in get
+    value = client.get(key)
+            ^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\commands\core.py", line 1923, in get
+    return self.execute_command("GET", name, keys=[name])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\client.py", line 657, in execute_command
+    return self._execute_command(*args, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\client.py", line 663, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\utils.py", line 196, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\connection.py", line 2598, in get_connection
+    connection = self.make_connection()
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\connection.py", line 2648, in make_connection
+    return self.connection_class(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJETS\PYTHON_2\rhBack\.venv\Lib\site-packages\redis\connection.py", line 1255, in __init__
+    super().__init__(**kwargs)
+TypeError: AbstractConnection.__init__() got an unexpected keyword argument 'CLIENT_CLASS'
+ERROR 2026-02-08 05:34:45,232 basehttp 7884 3560 "GET /api/user/permission/ HTTP/1.1" 500 194970
+ERROR 2026-02-08 05:34:45,232 basehttp 7884 3560 "GET /api/user/permission/ HTTP/1.1" 500 194970
+INFO 2026-02-08 05:37:34,869 basehttp 7884 14584 "GET /api/user/user-group/ HTTP/1.1" 200 162
+INFO 2026-02-08 05:37:34,869 basehttp 7884 14584 "GET /api/user/user-group/ HTTP/1.1" 200 162
+WARNING 2026-02-08 05:37:48,842 log 7884 6368 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:37:48,842 log 7884 6368 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:37:48,842 basehttp 7884 6368 "GET /api/user/user-group/ HTTP/1.1" 403 9987
+WARNING 2026-02-08 05:37:48,842 basehttp 7884 6368 "GET /api/user/user-group/ HTTP/1.1" 403 9987
+INFO 2026-02-08 05:40:56,016 autoreload 7884 8776 D:\PROJETS\PYTHON_2\rhBack\rhBack\settings.py changed, reloading.
+INFO 2026-02-08 05:40:56,016 autoreload 7884 8776 D:\PROJETS\PYTHON_2\rhBack\rhBack\settings.py changed, reloading.
+INFO 2026-02-08 05:41:02,464 autoreload 11452 12976 Watching for file changes with StatReloader
+INFO 2026-02-08 05:41:02,464 autoreload 11452 12976 Watching for file changes with StatReloader
+WARNING 2026-02-08 05:41:19,173 log 11452 9592 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:41:19,173 log 11452 9592 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:41:19,193 basehttp 11452 9592 "GET /api/user/user-group/ HTTP/1.1" 403 9987
+WARNING 2026-02-08 05:41:19,193 basehttp 11452 9592 "GET /api/user/user-group/ HTTP/1.1" 403 9987
+WARNING 2026-02-08 05:41:25,219 log 11452 12956 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:41:25,219 log 11452 12956 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:41:25,222 basehttp 11452 12956 "GET /api/user/user-group/ HTTP/1.1" 403 9987
+WARNING 2026-02-08 05:41:25,222 basehttp 11452 12956 "GET /api/user/user-group/ HTTP/1.1" 403 9987
+INFO 2026-02-08 05:41:44,224 autoreload 11452 12976 D:\PROJETS\PYTHON_2\rhBack\rhBack\settings.py changed, reloading.
+INFO 2026-02-08 05:41:44,224 autoreload 11452 12976 D:\PROJETS\PYTHON_2\rhBack\rhBack\settings.py changed, reloading.
+INFO 2026-02-08 05:41:50,014 autoreload 14204 17184 Watching for file changes with StatReloader
+INFO 2026-02-08 05:41:50,014 autoreload 14204 17184 Watching for file changes with StatReloader
+WARNING 2026-02-08 05:42:23,560 log 14204 6508 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:42:23,560 log 14204 6508 Forbidden: /api/user/user-group/
+WARNING 2026-02-08 05:42:23,560 basehttp 14204 6508 "GET /api/user/user-group/ HTTP/1.1" 403 9987
+WARNING 2026-02-08 05:42:23,560 basehttp 14204 6508 "GET /api/user/user-group/ HTTP/1.1" 403 9987
+INFO 2026-02-08 05:43:01,898 autoreload 14204 17184 D:\PROJETS\PYTHON_2\rhBack\user_app\modules\user_group\views.py changed, reloading.
+INFO 2026-02-08 05:43:01,898 autoreload 14204 17184 D:\PROJETS\PYTHON_2\rhBack\user_app\modules\user_group\views.py changed, reloading.
+INFO 2026-02-08 05:43:08,540 autoreload 17204 7136 Watching for file changes with StatReloader
+INFO 2026-02-08 05:43:08,540 autoreload 17204 7136 Watching for file changes with StatReloader
+INFO 2026-02-08 05:43:35,963 basehttp 17204 10804 "GET /api/user/user-group/ HTTP/1.1" 200 19783
+INFO 2026-02-08 05:43:35,963 basehttp 17204 10804 "GET /api/user/user-group/ HTTP/1.1" 200 19783
+INFO 2026-02-08 05:43:36,714 basehttp 17204 10804 "GET /static/rest_framework/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 18028
+INFO 2026-02-08 05:43:36,714 basehttp 17204 10804 "GET /static/rest_framework/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 18028
+INFO 2026-02-08 05:44:05,843 basehttp 17204 10804 "GET /api/user/user-group/?expand=user HTTP/1.1" 200 21040
+INFO 2026-02-08 05:44:05,843 basehttp 17204 10804 "GET /api/user/user-group/?expand=user HTTP/1.1" 200 21040
+INFO 2026-02-08 05:44:42,157 basehttp 17204 10804 "GET /api/user/user-group/?expand=user,group HTTP/1.1" 200 21705
+INFO 2026-02-08 05:44:42,157 basehttp 17204 10804 "GET /api/user/user-group/?expand=user,group HTTP/1.1" 200 21705
+INFO 2026-02-08 05:45:28,429 basehttp 17204 10804 "GET /api/user/user-group/?expand=user,group,assigned_by HTTP/1.1" 200 22939
+INFO 2026-02-08 05:45:28,429 basehttp 17204 10804 "GET /api/user/user-group/?expand=user,group,assigned_by HTTP/1.1" 200 22939
+INFO 2026-02-08 05:52:12,410 autoreload 17204 7136 D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\views.py changed, reloading.
+INFO 2026-02-08 05:52:12,410 autoreload 17204 7136 D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\views.py changed, reloading.
+INFO 2026-02-08 05:52:19,029 autoreload 11540 4704 Watching for file changes with StatReloader
+INFO 2026-02-08 05:52:19,029 autoreload 11540 4704 Watching for file changes with StatReloader
+INFO 2026-02-08 05:52:50,713 basehttp 11540 12792 "GET /api/user/group-permission/ HTTP/1.1" 200 24459
+INFO 2026-02-08 05:52:50,713 basehttp 11540 12792 "GET /api/user/group-permission/ HTTP/1.1" 200 24459
+INFO 2026-02-08 05:59:42,405 basehttp 11540 7992 "GET /api/user/group-permission/8/ HTTP/1.1" 200 19454
+INFO 2026-02-08 05:59:42,405 basehttp 11540 7992 "GET /api/user/group-permission/8/ HTTP/1.1" 200 19454
+INFO 2026-02-08 06:02:28,220 basehttp 11540 15236 - Broken pipe from ('127.0.0.1', 7164)
+INFO 2026-02-08 06:02:28,220 basehttp 11540 15236 - Broken pipe from ('127.0.0.1', 7164)
+INFO 2026-02-08 06:02:59,834 basehttp 11540 17144 "GET /api/user/ HTTP/1.1" 200 10653
+INFO 2026-02-08 06:02:59,834 basehttp 11540 17144 "GET /api/user/ HTTP/1.1" 200 10653
+WARNING 2026-02-08 06:03:10,645 log 11540 14004 Forbidden: /api/user/permission/
+WARNING 2026-02-08 06:03:10,645 log 11540 14004 Forbidden: /api/user/permission/
+WARNING 2026-02-08 06:03:10,647 basehttp 11540 14004 "GET /api/user/permission/ HTTP/1.1" 403 9981
+WARNING 2026-02-08 06:03:10,647 basehttp 11540 14004 "GET /api/user/permission/ HTTP/1.1" 403 9981
+INFO 2026-02-08 06:03:44,591 autoreload 11540 4704 D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\views.py changed, reloading.
+INFO 2026-02-08 06:03:44,591 autoreload 11540 4704 D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\views.py changed, reloading.
+INFO 2026-02-08 06:04:08,706 basehttp 11540 14720 - Broken pipe from ('127.0.0.1', 7216)
+INFO 2026-02-08 06:04:08,706 basehttp 11540 14720 - Broken pipe from ('127.0.0.1', 7216)
+INFO 2026-02-08 06:04:14,655 autoreload 10448 10292 Watching for file changes with StatReloader
+INFO 2026-02-08 06:04:14,655 autoreload 10448 10292 Watching for file changes with StatReloader
+INFO 2026-02-08 06:04:43,890 basehttp 10448 13124 "GET /api/user/permission/ HTTP/1.1" 200 18513
+INFO 2026-02-08 06:04:43,890 basehttp 10448 13124 "GET /api/user/permission/ HTTP/1.1" 200 18513

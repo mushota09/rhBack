@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\modules\user_group\views.py
+# hypothesis_version: 6.151.2
+
+['-assigned_at', 'action', 'already_assigned', 'assign', 'assigned', 'assigned_at', 'assigned_by', 'assignment_id', 'bulk-assign', 'code', 'data', 'error', 'failed', 'group', 'group__code', 'group__name', 'group_id', 'id', 'is_active', 'message', 'name', 'not_assigned', 'post', 'processed', 'remove', 'removed', 'results', 'status', 'successful', 'summary', 'total_users', 'user', 'user__email', 'user__nom', 'user__prenom', 'user_email', 'user_id', 'user_ids']

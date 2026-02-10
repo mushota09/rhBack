@@ -1,5 +1,5 @@
 from user_app.models import Group
-from adrf_flex_fields.views import FlexFieldsModelViewSet
+from adrf.viewsets import ModelViewSet
 from .serializers import J_GroupSerializers, I_GroupSerializers
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -10,19 +10,17 @@ from asgiref.sync import sync_to_async
 from utilities.auth import JWT_AUTH
 
 
-class GroupViewSet(FlexFieldsModelViewSet):
+class GroupViewSet(ModelViewSet):
     """
-    Async ViewSet for Group management with ADRF and flex_fields support
+    Async ViewSet for Group management with ADRF
 
     Provides:
     - CRUD operations for groups
     - Pagination, filtering, and search capabilities
-    - Field selection via query parameters
     - Async operations for better performance
     """
     queryset = Group.objects.all().order_by('code')
-    serializer_class_read = J_GroupSerializers
-    serializer_class_write = I_GroupSerializers
+    serializer_class = J_GroupSerializers
     authentication_classes = [JWT_AUTH]
     permission_classes = [IsAuthenticated]
 
@@ -33,12 +31,9 @@ class GroupViewSet(FlexFieldsModelViewSet):
     ordering_fields = ['name', 'code', 'created_at', 'updated_at']
     ordering = ['code']
 
-    # Flex fields configuration
-    permit_list_expands = []
-
-    async def get_queryset(self):
+    def get_queryset(self):
         """
-        Override to provide async queryset with optimizations
+        Override to provide queryset with optimizations
         """
         queryset = Group.objects.all().order_by('code')
 

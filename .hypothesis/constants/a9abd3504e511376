@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\rhBack\urls.py
+# hypothesis_version: 6.151.2
+
+['admin/', 'api/conge/', 'api/docs/', 'api/paie/', 'api/redoc/', 'api/schema/', 'api/user/', 'conge_app.urls', 'paie_app.urls', 'redoc', 'schema', 'swagger-ui', 'user_app.urls']

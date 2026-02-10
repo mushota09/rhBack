@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\modules\audit\services.py
+# hypothesis_version: 6.150.2
+
+[',', 'CREATE', 'DELETE', 'HTTP_USER_AGENT', 'HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR', 'UPDATE', 'assigned_at', 'assigned_by', 'created_at', 'created_by', 'granted', 'group_code', 'group_id', 'group_name', 'group_permission', 'is_active', 'permission_action', 'permission_codename', 'permission_id', 'permission_name', 'permission_resource', 'user_email', 'user_id']

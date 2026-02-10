@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\permissions.py
+# hypothesis_version: 6.150.2
+
+['CREATE', 'DELETE', 'GET', 'HEAD', 'OPTIONS', 'PATCH', 'POST', 'PUT', 'READ', 'UPDATE', 'group_permission', 'model', 'queryset', 'required_groups', 'required_permission', 'resource_name', 'user_group']

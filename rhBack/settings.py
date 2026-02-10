@@ -21,7 +21,7 @@ REDIS_URL = os.getenv("REDIS_URL", "redis://:Rapha@1996...@31.97.217.126:6379/0"
 # ]
 
 DEBUG = True
-ALLOWED_HOSTS = ["rapha.pythonanywhere.com","127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1","localhost"]
 
 # ************************* SECRET KEY *********************************
 SECRET_KEY = os.getenv("SECRET_KEY")
@@ -106,11 +106,10 @@ REST_FRAMEWORK = {
     ],
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'utilities.auth.PayrollJWTAuthentication',  # Enhanced JWT authentication
-        'utilities.auth.JWT_AUTH',  # Custom async JWT authentication
+        # 'utilities.auth.JWT_AUTH',  # Unified JWT authentication
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
     ],
 
     'DEFAULT_RENDERER_CLASSES': (
@@ -163,16 +162,30 @@ SIMPLE_JWT = {
 }
 
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Système de Gestion de Paie - API Documentation",
+    "TITLE": "Système de Gestion RH - API Documentation",
     "DESCRIPTION": """
-    API complète pour le système de gestion de paie permettant:
+    API complète pour le système de gestion des ressources humaines permettant:
 
     ## Fonctionnalités principales
+
+    ### Gestion de la Paie
     - **Gestion des périodes de paie**: Création, traitement et approbation des périodes mensuelles
     - **Calculs salariaux automatisés**: Calcul automatique des salaires, cotisations et retenues
     - **Génération de bulletins de paie**: Création de bulletins PDF professionnels
     - **Gestion des retenues**: Administration des retenues salariales et prêts employés
     - **Exports et rapports**: Export Excel et rapports d'audit détaillés
+
+    ### Gestion des Utilisateurs et Permissions
+    - **Gestion des groupes**: Administration des groupes organisationnels prédéfinis
+    - **Attribution des rôles**: Assignation des utilisateurs aux groupes avec permissions
+    - **Contrôle d'accès**: Système RBAC (Role-Based Access Control) granulaire
+    - **Audit des permissions**: Traçabilité complète des modifications de permissions
+    - **Interface de gestion**: API pour l'administration des utilisateurs et groupes
+
+    ### Gestion des Congés
+    - **Demandes de congés**: Soumission et approbation des demandes
+    - **Planification**: Gestion du calendrier des congés
+    - **Soldes**: Suivi des soldes de congés par employé
 
     ## Authentification
     Cette API utilise l'authentification JWT. Incluez le token dans l'en-tête:
@@ -180,15 +193,22 @@ SPECTACULAR_SETTINGS = {
     Authorization: Bearer <votre_token_jwt>
     ```
 
-    ## Permissions
-    - **Employés**: Consultation de leurs propres données de paie
-    - **RH**: Gestion complète des données de paie
-    - **Administrateurs**: Accès complet et approbation des périodes
+    ## Permissions et Groupes
+    Le système utilise des groupes prédéfinis avec des permissions spécifiques:
+
+    - **ADM** (Administrateur): Accès complet à toutes les fonctionnalités
+    - **RRH** (Responsable RH): Gestion complète des employés et paie
+    - **DIR** (Directeur): Approbation des périodes et consultation des rapports
+    - **RAF** (Responsable Administratif et Financier): Gestion financière et comptable
+    - **CM** (Comptable): Accès aux données comptables et financières
+    - **IT** (Informaticien): Administration technique du système
+    - **Autres groupes**: AP, AI, CSE, CH, CS, CSFP, CCI, GS, JR, LG, PL, PCA, PCR, PCDR, SEC
 
     ## Formats de données
     - Toutes les dates sont au format ISO 8601 (YYYY-MM-DD)
     - Les montants sont en décimales avec 2 chiffres après la virgule
     - Les réponses sont paginées par défaut (7 éléments par page)
+    - Support de la sélection flexible des champs via le paramètre `fields`
     """,
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
@@ -202,6 +222,26 @@ SPECTACULAR_SETTINGS = {
         }
     ],
     "TAGS": [
+        {
+            "name": "Gestion des Utilisateurs",
+            "description": "Endpoints pour la gestion des utilisateurs et authentification"
+        },
+        {
+            "name": "Gestion des Groupes",
+            "description": "Administration des groupes organisationnels et rôles"
+        },
+        {
+            "name": "Assignation Utilisateur-Groupe",
+            "description": "Gestion des assignations d'utilisateurs aux groupes"
+        },
+        {
+            "name": "Gestion des Permissions",
+            "description": "Administration des permissions et contrôle d'accès"
+        },
+        {
+            "name": "Audit et Traçabilité",
+            "description": "Consultation des logs d'audit et historique des modifications"
+        },
         {
             "name": "Périodes de Paie",
             "description": "Gestion des périodes mensuelles de traitement de paie"
@@ -219,8 +259,8 @@ SPECTACULAR_SETTINGS = {
             "description": "Génération de rapports et statistiques de paie"
         },
         {
-            "name": "Authentification",
-            "description": "Endpoints d'authentification et gestion des utilisateurs"
+            "name": "Gestion des Congés",
+            "description": "Administration des demandes et planification des congés"
         }
     ],
     "EXTERNAL_DOCS": {
@@ -245,12 +285,24 @@ DATABASES = {
     }
 }
 
+# Detect if we're running tests (pytest or manage.py test)
+# TESTING = 'test' in sys.argv or 'pytest' in sys.modules
+
 # Use SQLite for tests to avoid PostgreSQL connection issues
-# if 'test' in sys.argv:
+# if TESTING:
 #     DATABASES['default'] = {
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': ':memory:',
 #     }
+#     # Use dummy cache for tests to avoid Redis connection issues
+#     CACHES = {
+#         'default': {
+#             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+#         }
+#     }
+#     # Force Celery to run tasks synchronously during tests
+#     CELERY_TASK_ALWAYS_EAGER = True
+#     CELERY_TASK_EAGER_PROPAGATES = True
 
 # DATABASES = {
 #     'default': {
@@ -389,6 +441,13 @@ CELERY_TASK_ROUTES = {
     'paie_app.tasks.generate_payslip': {'queue': 'payslips'},
     'paie_app.tasks.generate_batch_payslips': {'queue': 'payslips'},
     'paie_app.tasks.export_payroll_data': {'queue': 'exports'},
+    'utilities.audit_service.create_audit_log_async': {'queue': 'audit'},  # Queue dédiée pour l'audit
+}
+
+# Celery task priorities
+CELERY_TASK_DEFAULT_PRIORITY = 5
+CELERY_TASK_PRIORITIES = {
+    'utilities.audit_service.create_audit_log_async': 3,  # Priorité basse pour l'audit (ne bloque pas les autres tâches)
 }
 
 # ****************************************************************

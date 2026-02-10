@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\utilities\middleware.py
+# hypothesis_version: 6.151.2
+
+[400, ',', '/', '/api/', 'Bearer ', 'CREATE', 'DELETE', 'GET', 'HTTP_AUTHORIZATION', 'HTTP_USER_AGENT', 'HTTP_X_FORWARDED_FOR', 'PATCH', 'POST', 'PUT', 'REMOTE_ADDR', 'UPDATE', 'VIEW', 'ip_address', 'method', 'path', 'unknown', 'user', 'user_agent']

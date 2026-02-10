@@ -24,4 +24,13 @@ dependencies = [
     "hypothesis>=6.100.0",
     "pytest>=7.4.0",
     "pytest-django>=4.5.0",
+    "djangorestframework-simplejwt>=5.5.1",
 ]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "rhBack.settings"
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--reuse-db --nomigrations"
+testpaths = ["user_app/tests", "paie_app/tests", "conge_app/tests"]

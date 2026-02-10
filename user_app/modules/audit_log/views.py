@@ -11,7 +11,7 @@ This module provides comprehensive audit log querying functionality with:
 import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from adrf_flex_fields.views import FlexFieldsModelViewSet
+from adrf.viewsets import ModelViewSet
 
 from user_app.models import audit_log
 from utilities.permissions import CanViewAuditLogs
@@ -103,7 +103,7 @@ class AuditLogFilter(django_filters.FilterSet):
         )
 
 
-class AuditLogViewSet(FlexFieldsModelViewSet):
+class AuditLogViewSet(ModelViewSet):
     """
     ViewSet for querying audit logs with comprehensive filtering and search.
 

@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\migrations\0005_add_bulk_operation_to_audit_log.py
+# hypothesis_version: 6.151.2
+
+['BULK_OPERATION', 'CREATE', 'Connexion', 'Créer', 'DELETE', 'Déconnexion', 'EXPORT', 'Exporter', 'LOGIN', 'LOGOUT', 'Modifier', 'Opération en lot', 'Supprimer', 'UPDATE', 'VIEW', 'Voir', 'action', 'audit_log', 'user_app']

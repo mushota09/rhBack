@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\urls.py
+# hypothesis_version: 6.151.2
+
+['GroupViewSet', 'UserGroupViewSet', 'group', 'login', 'login/', 'logout', 'logout/', 'protected', 'protected/', 'refresh', 'refresh/', 'user-group']

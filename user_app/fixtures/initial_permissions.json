@@ -1,0 +1,413 @@
+[
+  {
+    "model": "user_app.permission",
+    "pk": 1,
+    "fields": {
+      "codename": "employee.create",
+      "name": "Create Employee",
+      "content_type": 1,
+      "resource": "employee",
+      "action": "CREATE",
+      "description": "Permission to create new employees"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 2,
+    "fields": {
+      "codename": "employee.read",
+      "name": "Read Employee",
+      "content_type": 1,
+      "resource": "employee",
+      "action": "READ",
+      "descr
+": 1,"resource": "employee",
+      "action": "DELETE",
+      "description": "Permission to delete employees"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 5,
+    "fields": {
+      "codename": "contract.create",
+      "name": "Create Contract",
+      "content_type": 2,
+      "resource": "contract",
+      "action": "CREATE",
+      "description": "Permission to create employment contracts"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 6,
+    "fields": {
+      "codename": "contract.read",
+      "name": "Read Contract",
+      "content_type": 2,
+      "resource": "contract",
+      "action": "READ",
+      "description": "Permission to view employment contracts"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 7,
+    "fields": {
+      "codename": "contract.update",
+      "name": "Update Contract",
+      "content_type": 2,
+      "resource": "contract",
+      "action": "UPDATE",
+      "description": "Permission to update employment contracts"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 8,
+    "fields": {
+      "codename": "contract.delete",
+      "name": "Delete Contract",
+      "content_type": 2,
+      "resource": "contract",
+      "action": "DELETE",
+      "description": "Permission to delete employment contracts"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 9,
+    "fields": {
+      "codename": "payroll.create",
+      "name": "Create Payroll",
+      "content_type": 3,
+      "resource": "payroll",
+      "action": "CREATE",
+      "description": "Permission to create payroll periods and entries"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 10,
+    "fields": {
+      "codename": "payroll.read",
+      "name": "Read Payroll",
+      "content_type": 3,
+      "resource": "payroll",
+      "action": "READ",
+      "description": "Permission to view payroll information"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 11,
+    "fields": {
+      "codename": "payroll.update",
+      "name": "Update Payroll",
+      "content_type": 3,
+      "resource": "payroll",
+      "action": "UPDATE",
+      "description": "Permission to update payroll information"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 12,
+    "fields": {
+      "codename": "payroll.delete",
+      "name": "Delete Payroll",
+      "content_type": 3,
+      "resource": "payroll",
+      "action": "DELETE",
+      "description": "Permission to delete payroll entries"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 13,
+    "fields": {
+      "codename": "leave.create",
+      "name": "Create Leave",
+      "content_type": 4,
+      "resource": "leave",
+      "action": "CREATE",
+      "description": "Permission to create leave requests"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 14,
+    "fields": {
+      "codename": "leave.read",
+      "name": "Read Leave",
+      "content_type": 4,
+      "resource": "leave",
+      "action": "READ",
+      "description": "Permission to view leave requests"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 15,
+    "fields": {
+      "codename": "leave.update",
+      "name": "Update Leave",
+      "content_type": 4,
+      "resource": "leave",
+      "action": "UPDATE",
+      "description": "Permission to update leave requests"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 16,
+    "fields": {
+      "codename": "leave.delete",
+      "name": "Delete Leave",
+      "content_type": 4,
+      "resource": "leave",
+      "action": "DELETE",
+      "description": "Permission to delete leave requests"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 17,
+    "fields": {
+      "codename": "leave.approve",
+      "name": "Approve Leave",
+      "content_type": 4,
+      "resource": "leave",
+      "action": "UPDATE",
+      "description": "Permission to approve or reject leave requests"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 18,
+    "fields": {
+      "codename": "deduction.create",
+      "name": "Create Deduction",
+      "content_type": 5,
+      "resource": "deduction",
+      "action": "CREATE",
+      "description": "Permission to create employee deductions"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 19,
+    "fields": {
+      "codename": "deduction.read",
+      "name": "Read Deduction",
+      "content_type": 5,
+      "resource": "deduction",
+      "action": "READ",
+      "description": "Permission to view employee deductions"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 20,
+    "fields": {
+      "codename": "deduction.update",
+      "name": "Update Deduction",
+      "content_type": 5,
+      "resource": "deduction",
+      "action": "UPDATE",
+      "description": "Permission to update employee deductions"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 21,
+    "fields": {
+      "codename": "deduction.delete",
+      "name": "Delete Deduction",
+      "content_type": 5,
+      "resource": "deduction",
+      "action": "DELETE",
+      "description": "Permission to delete employee deductions"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 22,
+    "fields": {
+      "codename": "document.create",
+      "name": "Create Document",
+      "content_type": 6,
+      "resource": "document",
+      "action": "CREATE",
+      "description": "Permission to create employee documents"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 23,
+    "fields": {
+      "codename": "document.read",
+      "name": "Read Document",
+      "content_type": 6,
+      "resource": "document",
+      "action": "READ",
+      "description": "Permission to view employee documents"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 24,
+    "fields": {
+      "codename": "document.update",
+      "name": "Update Document",
+      "content_type": 6,
+      "resource": "document",
+      "action": "UPDATE",
+      "description": "Permission to update employee documents"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 25,
+    "fields": {
+      "codename": "document.delete",
+      "name": "Delete Document",
+      "content_type": 6,
+      "resource": "document",
+      "action": "DELETE",
+      "description": "Permission to delete employee documents"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 26,
+    "fields": {
+      "codename": "user_management.create",
+      "name": "Create User Management",
+      "content_type": 7,
+      "resource": "user_management",
+      "action": "CREATE",
+      "description": "Permission to create users and manage groups"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 27,
+    "fields": {
+      "codename": "user_management.read",
+      "name": "Read User Management",
+      "content_type": 7,
+      "resource": "user_management",
+      "action": "READ",
+      "description": "Permission to view user management information"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 28,
+    "fields": {
+      "codename": "user_management.update",
+      "name": "Update User Management",
+      "content_type": 7,
+      "resource": "user_management",
+      "action": "UPDATE",
+      "description": "Permission to update user groups and permissions"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 29,
+    "fields": {
+      "codename": "user_management.delete",
+      "name": "Delete User Management",
+      "content_type": 7,
+      "resource": "user_management",
+      "action": "DELETE",
+      "description": "Permission to delete users and groups"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 30,
+    "fields": {
+      "codename": "audit.read",
+      "name": "Read Audit",
+      "content_type": 8,
+      "resource": "audit",
+      "action": "READ",
+      "description": "Permission to view audit logs and reports"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 31,
+    "fields": {
+      "codename": "system.create",
+      "name": "Create System",
+      "content_type": 9,
+      "resource": "system",
+      "action": "CREATE",
+      "description": "Permission to create system configurations"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 32,
+    "fields": {
+      "codename": "system.read",
+      "name": "Read System",
+      "content_type": 9,
+      "resource": "system",
+      "action": "READ",
+      "description": "Permission to view system configurations"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 33,
+    "fields": {
+      "codename": "system.update",
+      "name": "Update System",
+      "content_type": 9,
+      "resource": "system",
+      "action": "UPDATE",
+      "description": "Permission to update system configurations"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 34,
+    "fields": {
+      "codename": "system.delete",
+      "name": "Delete System",
+      "content_type": 9,
+      "resource": "system",
+      "action": "DELETE",
+      "description": "Permission to delete system configurations"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 35,
+    "fields": {
+      "codename": "payroll.approve",
+      "name": "Approve Payroll",
+      "content_type": 3,
+      "resource": "payroll",
+      "action": "UPDATE",
+      "description": "Permission to approve payroll periods"
+    }
+  },
+  {
+    "model": "user_app.permission",
+    "pk": 36,
+    "fields": {
+      "codename": "report.read",
+      "name": "Read Reports",
+      "content_type": 10,
+      "resource": "report",
+      "action": "READ",
+      "description": "Permission to view and generate reports"
+    }
+  }
+]

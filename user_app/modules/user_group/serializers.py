@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from adrf.serializers import ModelSerializer as AsyncModelSerializer
 from user_app.models import UserGroup, User, Group
 from adrf_flex_fields import FlexFieldsModelSerializer
 from user_app.modules.user.serializers import J_userSerializers
@@ -23,14 +24,14 @@ class J_UserGroupSerializers(FlexFieldsModelSerializer):
         }
 
 
-class I_UserGroupSerializers(FlexFieldsModelSerializer):
+class I_UserGroupSerializers(AsyncModelSerializer):
     """
     Write serializer for UserGroup model with validation
     """
 
     class Meta:
         model = UserGroup
-        fields = ['user', 'group', 'is_active']
+        fields = ['user', 'group', 'assigned_by', 'is_active']
 
     def validate(self, data):
         """

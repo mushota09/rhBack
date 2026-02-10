@@ -1,6 +1,6 @@
 from user_app.models import employe
 from asgiref.sync import sync_to_async
-from adrf_flex_fields.views import FlexFieldsModelViewSet
+from adrf.viewsets import ModelViewSet
 from .serializers import J_employeSerializers, I_employeSerializers
 from rest_framework.response import Response
 from rest_framework import status
@@ -10,10 +10,10 @@ from django.db import transaction
 
 UserModel=get_user_model()
 
-class employeAPIView(FlexFieldsModelViewSet):
+class employeAPIView(ModelViewSet):
     queryset = employe.objects.all().order_by('-id')
     serializer_class_read = J_employeSerializers
-    serializer_class_write = I_employeSerializers 
+    serializer_class_write = I_employeSerializers
     filterset_fields = ['poste_id','poste_id__service_id']
     search_fields = [
         'prenom', 'nom', 'postnom', 'sexe', 'statut_matrimonial', 'nationalite',

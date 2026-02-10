@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\views.py
+# hypothesis_version: 6.150.2
+
+['CREATE', 'DELETE', 'UPDATE', 'action', 'codename', 'content_type', 'created_at', 'created_by', 'data', 'false', 'get', 'granted', 'group', 'group__code', 'group__name', 'group_code', 'group_id', 'group_name', 'head', 'id', 'name', 'options', 'permission', 'permission__action', 'permission__name', 'permission__resource', 'permission_action', 'permission_codename', 'permission_id', 'permission_name', 'permission_resource', 'resource', 'show_inactive', 'true']

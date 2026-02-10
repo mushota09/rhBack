@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\modules\audit_log\views.py
+# hypothesis_version: 6.151.2
+
+['-timestamp', 'action', 'adresse_ip', 'exact', 'filter_user_name', 'gte', 'icontains', 'id_ressource', 'in', 'lte', 'timestamp', 'timestamp__date', 'type_ressource', 'user_agent', 'user_id', 'user_id__email', 'user_id__nom', 'user_id__prenom']

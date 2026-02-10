@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\modules\user\views.py
+# hypothesis_version: 6.151.2
+
+[200, 400, 401, '-id', 'Accès autorisé', 'Authentification', 'Bonjour user', 'Compte désactivé', 'Connexion réussie', 'Données manquantes', 'Déconnexion réussie', 'Non authentifié', 'Refresh token requis', 'Token invalide', 'Token manquant', 'Tokens JWT', 'access_token', 'application/json', 'description', 'email', 'employe_id', 'employe_id.poste_id', 'employe_id__poste_id', 'error', 'format', 'id', 'message', 'object', 'password', 'properties', 'refresh', 'refresh_token', 'required', 'string', 'type', 'user', 'user@example.com', 'user_id', 'username']

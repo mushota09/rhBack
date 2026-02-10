@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from adrf_flex_fields.views import FlexFieldsModelViewSet
+from adrf.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 
@@ -22,7 +22,7 @@ from paie_app.modules.entree_paie.serializers import (
 )
 
 
-class EntreePaieAPIView(FlexFieldsModelViewSet):
+class EntreePaieAPIView(ModelViewSet):
     """API View pour la gestion des entrées de paie."""
 
     queryset = entree_paie.objects.all().order_by('-created_at')

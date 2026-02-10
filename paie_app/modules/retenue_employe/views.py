@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from adrf_flex_fields.views import FlexFieldsModelViewSet
+from adrf.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 
@@ -23,7 +23,7 @@ from paie_app.modules.retenue_employe.serializers import (
 )
 
 
-class RetenueEmployeAPIView(FlexFieldsModelViewSet):
+class RetenueEmployeAPIView(ModelViewSet):
     """API View pour la gestion des retenues employés."""
 
     queryset = retenue_employe.objects.all().order_by('-created_at')

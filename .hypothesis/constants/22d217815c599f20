@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\serializers.py
+# hypothesis_version: 6.150.2
+
+['action', 'code', 'codename', 'content_type', 'content_type.model', 'content_type_name', 'created_at', 'created_by', 'created_by.email', 'created_by_email', 'description', 'granted', 'group', 'group_ids', 'id', 'name', 'non_field_errors', 'permission', 'permission_ids', 'request', 'resource']

@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\modules\permission\__init__.py
+# hypothesis_version: 6.150.2
+
+['CanManagePermissions', 'CanManageUserGroups', 'HasGroupPermission', 'IsGroupMember', 'PermissionSerializer', 'PermissionService', 'PermissionViewSet']

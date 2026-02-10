@@ -1,0 +1,192 @@
+[
+  {
+    "model": "user_app.group",
+    "pk": 1,
+    "fields": {
+      "code": "ADM",
+      "name": "Administrateur",
+      "description": "Administrateur système avec accès complet à toutes les fonctionnalités",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 2,
+    "fields": {
+      "code": "AP",
+      "name": "Analyste des Projets",
+      "description": "Analyste responsable du suivi et de l'évaluation des projets",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 3,
+    "fields": {
+      "code": "AI",
+      "name": "Auditeur interne",
+      "description": "Auditeur interne responsable du contrôle et de l'audit",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 6,
+    "fields": {
+      "code": "CS",
+      "name": "Chef de service",
+      "description": "Chef de service responsable d'une unité organisationnelle",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 7,
+    "fields": {
+      "code": "CSFP",
+      "name": "Chef Service Financement Projets",
+      "description": "Chef du service de financement des projets",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 8,
+    "fields": {
+      "code": "CCI",
+      "name": "Chef du contrôle interne",
+      "description": "Chef du service de contrôle interne",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 9,
+    "fields": {
+      "code": "CM",
+      "name": "Comptable",
+      "description": "Comptable responsable de la gestion financière",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 10,
+    "fields": {
+      "code": "DIR",
+      "name": "Directeur/Directrice",
+      "description": "Directeur ou Directrice avec autorité de direction",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 11,
+    "fields": {
+      "code": "GS",
+      "name": "Gestionnaire de Stock",
+      "description": "Gestionnaire responsable de la gestion des stocks",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 12,
+    "fields": {
+      "code": "IT",
+      "name": "Informaticien",
+      "description": "Informaticien responsable des systèmes informatiques",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 13,
+    "fields": {
+      "code": "JR",
+      "name": "Juriste",
+      "description": "Juriste responsable des questions juridiques",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 14,
+    "fields": {
+      "code": "LG",
+      "name": "Logisticien",
+      "description": "Logisticien responsable de la logistique",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 15,
+    "fields": {
+      "code": "PL",
+      "name": "Planton",
+      "description": "Planton responsable de l'accueil et de la sécurité",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 16,
+    "fields": {
+      "code": "PCA",
+      "name": "Président commission d'appel",
+      "description": "Président de la commission d'appel",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 17,
+    "fields": {
+      "code": "PCR",
+      "name": "Président commission réception",
+      "description": "Président de la commission de réception",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 18,
+    "fields": {
+      "code": "PCDR",
+      "name": "Président commission recrutement",
+      "description": "Président de la commission de recrutement",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 19,
+    "fields": {
+      "code": "RAF",
+      "name": "Responsable Administratif et Financier",
+      "description": "Responsable des affaires administratives et financières",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 20,
+    "fields": {
+      "code": "RRH",
+      "name": "Responsable Ressources Humaines",
+      "description": "Responsable de la gestion des ressources humaines",
+      "is_active": true
+    }
+  },
+  {
+    "model": "user_app.group",
+    "pk": 21,
+    "fields": {
+      "code": "SEC",
+      "name": "Secrétaire",
+      "description": "Secrétaire responsable du support administratif",
+      "is_active": true
+    }
+  }
+]

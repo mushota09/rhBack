@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\utilities\audit_service.py
+# hypothesis_version: 6.151.2
+
+[200, 500, '***MASKED***', ',', 'BULK_OPERATION', 'EXPORT', 'HTTP_USER_AGENT', 'HTTP_X_FORWARDED_FOR', 'LOGIN', 'LOGIN_FAILED', 'LOGOUT', 'REMOTE_ADDR', '__dict__', '_ptr', 'access_token', 'action', 'affected_count', 'api_key', 'authentication', 'authorization', 'csrf_token', 'excel', 'execution_time', 'exported_count', 'format', 'ip_address', 'key', 'new_values', 'old_values', 'paie_app.audit', 'password', 'private_key', 'refresh_token', 'request_method', 'request_path', 'resource_id', 'resource_type', 'response_status', 'secret', 'secret_key', 'session', 'session_key', 'token', 'unknown', 'user_agent', 'user_id']

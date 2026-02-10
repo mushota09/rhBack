@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\modules\group\views.py
+# hypothesis_version: 6.151.2
+
+['active_groups', 'code', 'created_at', 'data', 'description', 'error', 'is_active', 'meta', 'name', 'results', 'total_groups', 'updated_at']

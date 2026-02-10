@@ -11,7 +11,8 @@ from paie_app.modules.retenue_employe.views import RetenueEmployeAPIView
 router = routers.DefaultRouter()
 router.register("periode_paie", PeriodePaieAPIView, basename="periode_paie")
 router.register("entree_paie", EntreePaieAPIView, basename="entree_paie")
-router.register("retenue_employe", RetenueEmployeAPIView, basename="retenue_employe")
+router.register("retenue_employe", RetenueEmployeAPIView,
+                basename="retenue_employe")
 
 urlpatterns = [
     # Audit reports URLs

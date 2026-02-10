@@ -57,7 +57,7 @@ class UserManagementAuditService:
         return await audit_log.objects.acreate(
             user_id=performed_by,
             action=action,
-            type_ressource='user_group_assignment',
+            type_ressource='UserGroup',
             id_ressource=resource_id,
             anciennes_valeurs=audit_old_values,
             nouvelles_valeurs=audit_new_values,
@@ -112,7 +112,7 @@ class UserManagementAuditService:
         return await audit_log.objects.acreate(
             user_id=performed_by,
             action=action,
-            type_ressource='group_permission',
+            type_ressource='GroupPermission',
             id_ressource=resource_id,
             anciennes_valeurs=audit_old_values,
             nouvelles_valeurs=audit_new_values,

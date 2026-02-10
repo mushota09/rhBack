@@ -1,0 +1,6 @@
+ERROR 2026-02-05 03:24:50,735 tasks 10508 4400 Error processing salary for employee 1: cannot unpack non-iterable coroutine object
+ERROR 2026-02-05 03:24:50,751 tasks 10508 4400 Error processing salary for employee 1: cannot unpack non-iterable coroutine object
+ERROR 2026-02-05 03:24:50,761 tasks 10508 4400 Error processing salary for employee 1: cannot unpack non-iterable coroutine object
+ERROR 2026-02-05 03:24:50,777 tasks 10508 4400 Error processing salary for employee 1: cannot unpack non-iterable coroutine object
+ERROR 2026-02-05 03:24:50,791 tasks 10508 4400 Error processing salary for employee 1: cannot unpack non-iterable coroutine object
+ERROR 2026-02-05 03:24:50,812 tasks 10508 4400 Error processing payroll period 2: 'coroutine' object has no attribute 'get'

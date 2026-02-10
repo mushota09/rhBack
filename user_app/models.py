@@ -299,6 +299,31 @@ class historique_contrat(models.Model):
 
 
 class UserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        """Synchronous version for tests"""
+        if not email:
+            raise ValueError(_('L\'email est requis'))
+
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+
+        if password:
+            user.set_password(password)
+
+        from django.db import IntegrityError
+        try:
+            user.save()
+            return user
+        except IntegrityError:
+            raise ValueError(_('Cet email est déjà utilisé. Veuillez utiliser un email différent.'))
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        """Synchronous version for tests"""
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active', True)
+        return self.create_user(email, password, **extra_fields)
+
     async def acreate_user(self, email, password=None, **extra_fields):
         """Version asynchrone simple avec gestion d'erreur"""
         if not email:
@@ -371,24 +396,54 @@ class audit_log(models.Model):
         ('VIEW', 'Voir'),
         ('EXPORT', 'Exporter'),
         ('BULK_OPERATION', 'Opération en lot'),
+        ('CREATE_FAILED', 'Création échouée'),
+        ('UPDATE_FAILED', 'Modification échouée'),
+        ('DELETE_FAILED', 'Suppression échouée'),
+        ('VIEW_FAILED', 'Consultation échouée'),
     ]
 
-    user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='audit_logs')
+    user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='audit_logs')
     action = models.CharField(max_length=20, choices=ACTION_CHOICES)
     type_ressource = models.CharField(max_length=50)
     id_ressource = models.CharField(max_length=100, blank=True)
-    anciennes_valeurs = models.JSONField(null=True, blank=True)
-    nouvelles_valeurs = models.JSONField(null=True, blank=True)
+    anciennes_valeurs = models.JSONField(null=True, blank=True, help_text="État avant modification")
+    nouvelles_valeurs = models.JSONField(null=True, blank=True, help_text="État après modification")
     adresse_ip = models.GenericIPAddressField(null=True, blank=True)
     user_agent = models.TextField(blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    # Nouveaux champs pour un audit plus complet
+    session_key = models.CharField(max_length=40, blank=True, help_text="Clé de session utilisateur")
+    request_method = models.CharField(max_length=10, blank=True, help_text="Méthode HTTP")
+    request_path = models.CharField(max_length=500, blank=True, help_text="Chemin de la requête")
+    response_status = models.IntegerField(null=True, blank=True, help_text="Code de statut HTTP")
+    execution_time = models.FloatField(null=True, blank=True, help_text="Temps d'exécution en secondes")
+
     class Meta:
         db_table = 'auth_audit_log'
         ordering = ['-timestamp']
+        indexes = [
+            models.Index(fields=['user_id', 'timestamp']),
+            models.Index(fields=['action', 'timestamp']),
+            models.Index(fields=['type_ressource', 'timestamp']),
+            models.Index(fields=['adresse_ip', 'timestamp']),
+        ]
 
     def __str__(self):
-        return f"{self.user_id} - {self.action} - {self.type_ressource} - {self.timestamp}"
+        user_display = self.user_id.email if self.user_id else "Anonyme"
+        return f"{user_display} - {self.action} - {self.type_ressource} - {self.timestamp}"
+
+    @property
+    def is_failed_action(self):
+        """Retourne True si l'action a échoué"""
+        return self.action.endswith('_FAILED')
+
+    @property
+    def user_display(self):
+        """Affichage formaté de l'utilisateur"""
+        if self.user_id:
+            return f"{self.user_id.get_full_name()} ({self.user_id.email})"
+        return "Utilisateur anonyme"
 
 
 

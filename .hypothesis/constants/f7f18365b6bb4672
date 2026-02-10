@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\modules\user_group\serializers.py
+# hypothesis_version: 6.151.2
+
+['Group ID', 'List of user IDs', '__all__', 'assign', 'assigned_by', 'group', 'id', 'is_active', 'remove', 'user']

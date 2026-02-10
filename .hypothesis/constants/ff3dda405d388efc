@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\user_app\urls.py
+# hypothesis_version: 6.151.2
+
+['GroupViewSet', 'PermissionViewSet', 'UserGroupViewSet', 'audit_log', 'audit_logAPIView', 'contrat', 'contratAPIView', 'document', 'documentAPIView', 'employe', 'employeAPIView', 'group', 'group-permission', 'historique_contrat', 'login', 'login/', 'logout', 'logout/', 'permission', 'poste', 'posteAPIView', 'protected', 'protected/', 'refresh', 'refresh/', 'service', 'serviceAPIView', 'user', 'user-group', 'userAPIView']

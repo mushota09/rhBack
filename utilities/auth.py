@@ -1,10 +1,6 @@
-from random import random
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.exceptions import AuthenticationFailed
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from .jwt_utils import verify_token
 
 
@@ -13,9 +9,14 @@ User = get_user_model()
 
 class JWT_AUTH(BaseAuthentication):
     """
-    Custom JWT authentication class for async views.
+    Custom JWT authentication class for both sync and async views.
+    Supports both synchronous and asynchronous authentication automatically.
     """
-    async def authenticate(self, request):
+
+    def authenticate(self, request):
+        """
+        Synchronous authentication for regular views.
+        """
         auth_header = request.headers.get('Authorization')
         if not auth_header or not auth_header.startswith('Bearer '):
             return None
@@ -24,45 +25,20 @@ class JWT_AUTH(BaseAuthentication):
 
         try:
             payload = verify_token(token, 'access')
-            user = await User.objects.aget(id=payload['user_id'])
+            user = User.objects.get(id=payload['user_id'])
 
             # Check if user is active
             if not user.is_active:
                 raise AuthenticationFailed('User account is disabled')
 
+            # Log authentication for audit
+            self._log_authentication(request, user)
+
             return (user, token)
-        except (ValueError, User.DoesNotExist):
-            raise AuthenticationFailed('Token invalide')
-
-
-class PayrollJWTAuthentication(JWTAuthentication):
-    """
-    Enhanced JWT authentication with payroll-specific validation.
-    """
-
-    def authenticate(self, request):
-        """
-        Authenticate the request and return a two-tuple of (user, token).
-        """
-        header = self.get_header(request)
-        if header is None:
-            return None
-
-        raw_token = self.get_raw_token(header)
-        if raw_token is None:
-            return None
-
-        validated_token = self.get_validated_token(raw_token)
-        user = self.get_user(validated_token)
-
-        # Additional validation for payroll system
-        if not user.is_active:
-            raise AuthenticationFailed('User account is disabled')
-
-        # Log authentication attempt for audit
-        self._log_authentication(request, user)
-
-        return user, validated_token
+        except ValueError as exc:
+            raise AuthenticationFailed('Token invalide') from exc
+        except User.DoesNotExist as exc:
+            raise AuthenticationFailed('Token invalide') from exc
 
     def _log_authentication(self, request, user):
         """

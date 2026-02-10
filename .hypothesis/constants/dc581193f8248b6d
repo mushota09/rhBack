@@ -1,0 +1,4 @@
+# file: D:\PROJETS\PYTHON_2\rhBack\paie_app\services\audit_reports_service.py
+# hypothesis_version: 6.151.2
+
+['annee', 'email', 'employe', 'generated_at', 'id', 'mois', 'moyenne_salaire_brut', 'nom', 'nombre_employes', 'nombre_periodes', 'periode', 'periode_paie_id', 'prenom', 'salaire_brut_moyen', 'salaire_brut_total', 'salaire_net_total', 'statistiques', 'statut', 'total_salaire_brut', 'total_salaire_net']

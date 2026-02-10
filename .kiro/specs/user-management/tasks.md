@@ -175,57 +175,59 @@ Ce plan d'implémentation détaille les étapes pour développer un système com
     - Add automatic token refresh
     - _Requirements: 3.1, 6.1_
 
-- [ ] 13. Add default permissions for predefined groups
-  - [ ] 13.1 Create permission fixtures for each group
+- [-] 13. Add default permissions for predefined groups
+  - [x] 13.1 Create permission fixtures for each group
     - Define appropriate permissions for ADM, RRH, DIR, etc.
     - Implement hierarchical permission structure
     - _Requirements: 4.4, 3.6_
 
-  - [ ]* 13.2 Write property test for default group permissions
+  - [x]* 13.2 Write property test for default group permissions
     - **Property 9: Default Group Permissions**
     - **Validates: Requirements 4.4**
 
-- [ ] 14. Implement responsive design and accessibility
-  - [ ] 14.1 Add responsive breakpoints and mobile optimization
+- [-] 14. Implement responsive design and accessibility
+  - [x] 14.1 Add responsive breakpoints and mobile optimization
     - Ensure all components work on different screen sizes
     - Optimize touch interactions for mobile devices
     - _Requirements: 6.5_
 
-  - [ ] 14.2 Add accessibility features
+  - [x] 14.2 Add accessibility features
     - Implement keyboard navigation
     - Add ARIA labels and screen reader support
     - _Requirements: 6.5_
 
 - [ ] 15. Setup comprehensive testing suite
-  - [ ] 15.1 Configure Vitest for frontend testing
+  - [x] 15.1 Configure Vitest for frontend testing
     - Set up test environment and utilities
     - Add test coverage reporting
     - _Requirements: 8.2, 8.6_
 
-  - [ ] 15.2 Add end-to-end tests for critical flows
+  - [x] 15.2 Add end-to-end tests for critical flows
     - Test user login and permission loading
     - Test user-group assignment workflows
     - Test permission management workflows
     - _Requirements: 8.5_
 
-- [ ]* 15.3 Write property-based tests for permission validation
+- [x] 15.3 Write property-based tests for permission validation
+
   - Test permission inheritance and validation logic
   - Test edge cases with random data generation
   - _Requirements: 8.4_
 
-- [ ] 16. Final integration and deployment preparation
-  - [ ] 16.1 Wire all components together in main application
+- [-] 16. Final integration and deployment preparation
+  - [x] 16.1 Wire all components together in main application
     - Integrate user management into existing app structure
     - Add navigation and routing
     - _Requirements: 6.1, 6.2_
 
-  - [ ] 16.2 Add API documentation and OpenAPI schema
+  - [x] 16.2 Add API documentation and OpenAPI schema
     - Document all user management endpoints
     - Add examples and usage guidelines
     - _Requirements: 5.5_
 
-- [ ] 17. Final checkpoint - Complete system testing
+- [x] 17. Final checkpoint - Complete system testing
   - Ensure all tests pass, verify system integration, ask the user if questions arise.
+  -test if the backend run
 
 ## Notes
 
