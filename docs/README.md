@@ -27,6 +27,7 @@ Cette documentation couvre l'API complète du système de gestion des ressources
 
 ### 📖 Référence
 - [API Documentation](reference/api-reference.md)
+- [Types TypeScript](reference/typescript-types.md)
 - [Glossaire](reference/glossary.md)
 - [FAQ](reference/faq.passe"
   }'

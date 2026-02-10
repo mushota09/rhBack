@@ -12,6 +12,28 @@ Cette documentation détaille toutes les APIs REST disponibles dans le système 
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
 ```
 
+## Types de Données Frontend
+
+Le système utilise des interfaces TypeScript complètes pour assurer la cohérence entre le frontend et l'API. Les principales entités incluent:
+
+### Employé (`Employe`)
+Interface complète avec 25+ champs incluant informations personnelles, contact, adresse, emploi, financières, familiales et contact d'urgence.
+
+### Contrat (`Contrat`) 
+Gestion complète des contrats avec types (permanent, temporaire, stage, consultant), structure salariale, et cotisations.
+
+### Service/Poste (`Service`, `Poste`)
+Hiérarchie organisationnelle avec codes, descriptions et relations.
+
+### Document (`Document`)
+Catégorisation des documents (contrat, pièce d'identité, CV, certificats, etc.) avec métadonnées et suivi d'expiration.
+
+### Utilisateur (`User`)
+Comptes système avec authentification, permissions basées sur les rôles, et liaison avec les employés.
+
+### Journal d'Audit (`AuditLog`)
+Traçabilité complète des actions avec suivi utilisateur, changements de ressources, IP et user agent.
+
 ## Authentification
 
 ### Obtenir un Token
@@ -49,6 +71,508 @@ Content-Type: application/json
 {
     "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
 }
+```
+
+## Gestion des Employés (user_app)
+
+### Lister les Employés
+
+```http
+GET /api/user_app/employes/
+```
+
+**Paramètres de requête :**
+- `service_id` (integer) : Filtrer par service
+- `poste_id` (integer) : Filtrer par poste
+- `statut_emploi` (string) : Filtrer par statut (ACTIVE, INACTIVE, TERMINATED, SUSPENDED)
+- `search` (string) : Recherche par nom, prénom, matricule
+- `expand` (string) : Champs à étendre (poste, responsable, service)
+
+**Réponse :**
+```json
+{
+    "count": 150,
+    "results": [
+        {
+            "id": 1,
+            "prenom": "Jean",
+            "nom": "MUKENDI",
+            "postnom": "Claude",
+            "matricule": "EMP001",
+            "email_personnel": "jean.mukendi@gmail.com",
+            "email_professionnel": "j.mukendi@company.com",
+            "telephone_personnel": "+243123456789",
+            "date_naissance": "1985-03-15",
+            "sexe": "M",
+            "statut_matrimonial": "M",
+            "nationalite": "Congolaise",
+            "date_embauche": "2020-01-15",
+            "statut_emploi": "ACTIVE",
+            "nombre_enfants": 2,
+            "poste_id": 5,
+            "responsable_id": 3,
+            "full_name": "MUKENDI Jean Claude",
+            "poste": {
+                "id": 5,
+                "titre": "Développeur Senior",
+                "code": "DEV_SR",
+                "service": {
+                    "id": 2,
+                    "titre": "Informatique",
+                    "code": "IT"
+                }
+            },
+            "created_at": "2020-01-15T08:00:00Z",
+            "updated_at": "2024-02-01T10:30:00Z"
+        }
+    ]
+}
+```
+
+### Créer un Employé
+
+```http
+POST /api/user_app/employes/
+Content-Type: application/json
+
+{
+    "prenom": "Marie",
+    "nom": "KASONGO",
+    "postnom": "Grace",
+    "date_naissance": "1990-07-20",
+    "sexe": "F",
+    "statut_matrimonial": "S",
+    "nationalite": "Congolaise",
+    "banque": "Banque Commerciale du Congo",
+    "numero_compte": "001-234567-89",
+    "niveau_etude": "Licence",
+    "numero_inss": "123456789",
+    "email_personnel": "marie.kasongo@gmail.com",
+    "email_professionnel": "m.kasongo@company.com",
+    "telephone_personnel": "+243987654321",
+    "adresse_ligne1": "123 Avenue de la Paix",
+    "ville": "Kinshasa",
+    "province": "Kinshasa",
+    "pays": "République Démocratique du Congo",
+    "poste_id": 3,
+    "responsable_id": 1,
+    "date_embauche": "2024-03-01",
+    "statut_emploi": "ACTIVE",
+    "nombre_enfants": 0,
+    "nom_contact_urgence": "KASONGO Paul",
+    "lien_contact_urgence": "Père",
+    "telephone_contact_urgence": "+243111222333"
+}
+```
+
+### Détail d'un Employé
+
+```http
+GET /api/user_app/employes/{id}/
+```
+
+**Réponse complète avec tous les champs de l'interface Employe**
+
+### Gestion des Contrats
+
+```http
+GET /api/user_app/contrats/
+```
+
+**Paramètres :**
+- `employe_id` (integer) : Filtrer par employé
+- `type_contrat` (string) : Type (PERMANENT, TEMPORARY, INTERNSHIP, CONSULTANT)
+- `statut` (string) : Statut du contrat
+
+**Réponse :**
+```json
+{
+    "count": 45,
+    "results": [
+        {
+            "id": 1,
+            "employe_id": 1,
+            "type_contrat": "PERMANENT",
+            "date_debut": "2020-01-15",
+            "date_fin": null,
+            "type_salaire": "M",
+            "salaire_base": "2000000.00",
+            "devise": "CDF",
+            "indemnite_logement": 25.0,
+            "indemnite_deplacement": 15.0,
+            "prime_fonction": 30.0,
+            "autre_avantage": "0.00",
+            "assurance_patronale": 1.5,
+            "assurance_salariale": 1.0,
+            "fpc_patronale": 0.5,
+            "fpc_salariale": 0.5,
+            "statut": "en_cours",
+            "commentaire": "Contrat initial",
+            "employe": {
+                "id": 1,
+                "nom": "MUKENDI",
+                "prenom": "Jean",
+                "matricule": "EMP001"
+            }
+        }
+    ]
+}
+```
+
+### Gestion des Services
+
+```http
+GET /api/user_app/services/
+POST /api/user_app/services/
+PUT /api/user_app/services/{id}/
+DELETE /api/user_app/services/{id}/
+```
+
+**Structure Service :**
+```json
+{
+    "id": 1,
+    "titre": "Informatique",
+    "code": "IT",
+    "description": "Service informatique et développement"
+}
+```
+
+### Gestion des Postes
+
+```http
+GET /api/user_app/postes/
+POST /api/user_app/postes/
+PUT /api/user_app/postes/{id}/
+DELETE /api/user_app/postes/{id}/
+```
+
+**Structure Poste :**
+```json
+{
+    "id": 1,
+    "titre": "Développeur Senior",
+    "code": "DEV_SR",
+    "description": "Développeur avec 5+ années d'expérience",
+    "service_id": 1,
+    "service": {
+        "id": 1,
+        "titre": "Informatique",
+        "code": "IT"
+    }
+}
+```
+
+### Gestion des Documents
+
+```http
+GET /api/user_app/documents/
+POST /api/user_app/documents/
+PUT /api/user_app/documents/{id}/
+DELETE /api/user_app/documents/{id}/
+```
+
+**Paramètres pour GET :**
+- `employe_id` (integer) : Filtrer par employé
+- `document_type` (string) : Type de document
+- `expiry_date_before` (date) : Documents expirant avant cette date
+
+**Structure Document :**
+```json
+{
+    "id": 1,
+    "employe_id": 1,
+    "document_type": "CONTRACT",
+    "titre": "Contrat de travail - Jean MUKENDI",
+    "description": "Contrat permanent signé le 15/01/2020",
+    "file": "/media/documents/contracts/emp001_contract.pdf",
+    "uploaded_by": "admin",
+    "expiry_date": null,
+    "created_at": "2020-01-15T08:00:00Z",
+    "updated_at": "2020-01-15T08:00:00Z",
+    "employe": {
+        "id": 1,
+        "nom": "MUKENDI",
+        "prenom": "Jean",
+        "matricule": "EMP001"
+    }
+}
+```
+
+### Gestion des Utilisateurs Système
+
+```http
+GET /api/user_app/users/
+POST /api/user_app/users/
+PUT /api/user_app/users/{id}/
+DELETE /api/user_app/users/{id}/
+```
+
+**Structure User :**
+```json
+{
+    "id": 1,
+    "email": "admin@company.com",
+    "phone": "+243123456789",
+    "photo": "/media/photos/admin.jpg",
+    "employe_id": 1,
+    "nom": "MUKENDI",
+    "prenom": "Jean",
+    "is_active": true,
+    "is_staff": true,
+    "is_superuser": false,
+    "last_login": "2024-02-02T08:00:00Z",
+    "date_joined": "2020-01-15T08:00:00Z",
+    "created_at": "2020-01-15T08:00:00Z",
+    "updated_at": "2024-02-01T10:30:00Z",
+    "employe": {
+        "id": 1,
+        "nom": "MUKENDI",
+        "prenom": "Jean",
+        "matricule": "EMP001"
+    },
+    "groups": [
+        {
+            "id": 1,
+            "code": "RRH",
+            "name": "Ressources Humaines"
+        }
+    ],
+    "permissions": [
+        {
+            "id": 1,
+            "codename": "view_employe",
+            "name": "Can view employee",
+            "resource": "employe",
+            "action": "READ"
+        }
+    ]
+}
+```
+
+### Gestion des Groupes
+
+```http
+GET /api/user_app/groups/
+POST /api/user_app/groups/
+PUT /api/user_app/groups/{id}/
+DELETE /api/user_app/groups/{id}/
+```
+
+**Structure Group :**
+```json
+{
+    "id": 1,
+    "code": "RRH",
+    "name": "Ressources Humaines",
+    "description": "Groupe pour la gestion des ressources humaines",
+    "is_active": true,
+    "created_at": "2020-01-15T08:00:00Z",
+    "updated_at": "2024-02-01T10:30:00Z",
+    "user_count": 5,
+    "permission_count": 12
+}
+```
+
+### Gestion des Permissions
+
+```http
+GET /api/user_app/permissions/
+GET /api/user_app/permissions/{id}/
+```
+
+**Paramètres pour GET :**
+- `resource` (string) : Filtrer par type de ressource
+
+**Structure Permission :**
+```json
+{
+    "id": 1,
+    "codename": "view_employe",
+    "name": "Can view employee",
+    "content_type": 15,
+    "resource": "employe",
+    "action": "READ",
+    "description": "Permission to view employee records"
+}
+```
+
+### Relations Utilisateur-Groupe
+
+```http
+GET /api/user_app/user-groups/
+POST /api/user_app/user-groups/
+PUT /api/user_app/user-groups/{id}/
+DELETE /api/user_app/user-groups/{id}/
+GET /api/user_app/user-groups/by-user/{user_id}/
+GET /api/user_app/user-groups/by-group/{group_id}/
+POST /api/user_app/user-groups/bulk-assign/
+```
+
+**Structure UserGroup :**
+```json
+{
+    "id": 1,
+    "user": 1,
+    "group": 1,
+    "assigned_by": 2,
+    "assigned_at": "2024-02-01T10:30:00Z",
+    "is_active": true,
+    "group_details": {
+        "id": 1,
+        "code": "RRH",
+        "name": "Ressources Humaines"
+    },
+    "user_details": {
+        "id": 1,
+        "email": "admin@company.com",
+        "nom": "MUKENDI",
+        "prenom": "Jean"
+    }
+}
+```
+
+**Assignation en masse :**
+```http
+POST /api/user_app/user-groups/bulk-assign/
+Content-Type: application/json
+
+{
+    "group_id": 1,
+    "user_ids": [1, 2, 3, 4]
+}
+```
+
+### Permissions de Groupe
+
+```http
+GET /api/user_app/group-permissions/
+POST /api/user_app/group-permissions/
+PUT /api/user_app/group-permissions/{id}/
+DELETE /api/user_app/group-permissions/{id}/
+```
+
+**Paramètres pour GET :**
+- `group` (integer) : Filtrer par groupe
+- `permission` (integer) : Filtrer par permission
+
+**Structure GroupPermission :**
+```json
+{
+    "id": 1,
+    "group": 1,
+    "permission": 1,
+    "granted": true,
+    "created_at": "2024-02-01T10:30:00Z",
+    "created_by": 2,
+    "group_details": {
+        "id": 1,
+        "code": "RRH",
+        "name": "Ressources Humaines"
+    },
+    "permission_details": {
+        "id": 1,
+        "codename": "view_employe",
+        "name": "Can view employee",
+        "resource": "employe",
+        "action": "READ"
+    }
+}
+```
+
+### Journal d'Audit
+
+```http
+GET /api/user_app/audit-logs/
+```
+
+**Paramètres :**
+- `user_id` (integer) : Filtrer par utilisateur
+- `action` (string) : Type d'action (CREATE, UPDATE, DELETE, LOGIN, LOGOUT, VIEW, EXPORT)
+- `type_ressource` (string) : Type de ressource modifiée
+- `date_after` (datetime) : Actions après cette date
+- `date_before` (datetime) : Actions avant cette date
+
+**Réponse :**
+```json
+{
+    "count": 1250,
+    "results": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "action": "UPDATE",
+            "type_ressource": "employe",
+            "id_ressource": "123",
+            "anciennes_valeurs": {
+                "telephone_personnel": "+243111111111",
+                "adresse_ligne1": "Ancienne adresse"
+            },
+            "nouvelles_valeurs": {
+                "telephone_personnel": "+243123456789",
+                "adresse_ligne1": "123 Avenue de la Paix"
+            },
+            "adresse_ip": "192.168.1.100",
+            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)...",
+            "timestamp": "2024-02-02T10:30:00Z",
+            "user": {
+                "id": 1,
+                "email": "admin@company.com",
+                "nom": "MUKENDI",
+                "prenom": "Jean"
+            }
+        }
+    ]
+}
+```
+
+### Historique des Contrats
+
+```http
+GET /api/user_app/historique-contrats/
+POST /api/user_app/historique-contrats/
+```
+
+**Structure HistoriqueContrat :**
+```json
+{
+    "id": 1,
+    "contrat_id": 1,
+    "date_modification": "2024-01-01",
+    "ancien_salaire": "1800000.00",
+    "nouveau_salaire": "2000000.00",
+    "prime_fonction": "600000.00",
+    "indemnites": {
+        "logement": "500000.00",
+        "deplacement": "300000.00"
+    },
+    "cotisations": {
+        "inss_pension": "13500.00",
+        "inss_risque": "1200.00",
+        "mfp": "20000.00"
+    },
+    "allocation_familiale": "10000.00",
+    "autres_avantages": "0.00",
+    "commentaire": "Augmentation annuelle",
+    "contrat": {
+        "id": 1,
+        "employe_id": 1,
+        "type_contrat": "PERMANENT"
+    }
+}
+```
+
+**Paramètres de requête pour GET :**
+- `contrat_id` (integer) : Filtrer par contrat spécifique
+- `contrat_id__employe_id` (integer) : Filtrer par employé (via contrat)
+
+**Exemples d'utilisation :**
+```http
+# Récupérer l'historique d'un contrat spécifique
+GET /api/user_app/historique-contrats/?contrat_id=1
+
+# Récupérer tout l'historique des contrats d'un employé
+GET /api/user_app/historique-contrats/?contrat_id__employe_id=123
 ```
 
 ## Périodes de Paie
