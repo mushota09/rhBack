@@ -54,6 +54,8 @@ class UserGroupViewSet(ModelViewSet):
         """
         queryset = UserGroup.objects.select_related(
             'user', 'group', 'assigned_by'
+        ).prefetch_related(
+            'group__service_groups'
         ).order_by('-assigned_at')
 
         # Apply active filter by default if not specified

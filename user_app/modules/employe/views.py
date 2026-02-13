@@ -1,26 +1,30 @@
-from user_app.models import employe, contrat, document
-from asgiref.sync import sync_to_async
-from adrf.viewsets import ModelViewSet
-from .serializers import J_employeSerializers, I_employeSerializers
-from user_app.modules.contrat.serializers import I_contratSerializers
-from user_app.modules.document.serializers import I_documentSerializers
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.decorators import action
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth import get_user_model
-from django.db import transaction
 import json
 import logging
+
+from asgiref.sync import sync_to_async
+from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
+from django.db import transaction
+from rest_framework import status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+
+from adrf.viewsets import ModelViewSet
+from adrf_flex_fields.views import FlexFieldsMixin, SerializerMethodMixin
+from user_app.models import employe
+from user_app.modules.contrat.serializers import I_contratSerializers
+from user_app.modules.document.serializers import I_documentSerializers
+from .serializers import J_employeSerializers, I_employeSerializers
 
 logger = logging.getLogger(__name__)
 UserModel = get_user_model()
 
-class employeAPIView(ModelViewSet):
+
+class EmployeViewSet(FlexFieldsMixin, SerializerMethodMixin, ModelViewSet):
     queryset = employe.objects.all().order_by('-id')
     serializer_class_read = J_employeSerializers
     serializer_class_write = I_employeSerializers
-    filterset_fields = ['poste_id','poste_id__service_id']
+    filterset_fields = ['poste_id', 'poste_id__service_id']
     search_fields = [
         'prenom', 'nom', 'postnom', 'sexe', 'statut_matrimonial', 'nationalite',
         'banque', 'numero_compte', 'niveau_etude', 'numero_inss',
@@ -29,19 +33,58 @@ class employeAPIView(ModelViewSet):
         'adresse_ligne1', 'adresse_ligne2', 'ville', 'province', 'code_postal',
         'pays', 'matricule'
     ]
-    permit_list_expands = ['poste_id','poste_id.service_id']
+    permit_list_expands = [
+        'poste_id',
+        'poste_id.service',
+        'poste_id.group',
+        'user_account',
+        'user_account.user_groups'
+    ]
+
+    def get_queryset(self):
+        """
+        Override to provide queryset with optimizations using select_related
+        and prefetch_related for better performance with expansions
+        """
+        return employe.objects.select_related(
+            'poste_id',
+            'poste_id__service',
+            'poste_id__group',
+            'user_account'
+        ).prefetch_related(
+            'user_account__user_groups',
+            'user_account__user_groups__group'
+        ).all().order_by('-id')
 
     async def acreate(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         await sync_to_async(serializer.is_valid)(raise_exception=True)
 
+        # Extract group_id if provided (optional)
+        group_id = request.data.get('group_id')
+
         @sync_to_async
         @transaction.atomic
         def save_all():
+            from user_app.models import Group, UserGroup
+
+            # Validate group if provided
+            group_instance = None
+            if group_id:
+                try:
+                    group_instance = Group.objects.get(id=group_id, is_active=True)
+                except Group.DoesNotExist:
+                    raise ValueError(
+                        f"Groupe avec l'ID {group_id} introuvable ou inactif"
+                    )
+
+            # Save employee
             instance = serializer.save()
             employe_id = instance.id
 
+            # Create user account
             password = request.data.get('password', "12345")
+            user_instance = None
             if password:
                 nom = request.data.get('nom', f'utilisateur{employe_id}')
                 prenom = request.data.get('prenom', f'utilisateur{employe_id}')
@@ -50,23 +93,44 @@ class employeAPIView(ModelViewSet):
                     prenom=prenom,
                     employe_id=instance,
                     photo=request.FILES.get('photo', None),
-                    email=request.data.get('email_professionnel', request.data.get("email_personnel"),request.data.get('email', '')),
+                    email=request.data.get(
+                        'email_professionnel',
+                        request.data.get(
+                            "email_personnel",
+                            request.data.get('email', '')
+                        )
+                    ),
                     password=make_password(password),
                     is_active=True
                 )
                 user_instance.save()
 
+                # Create UserGroup if group_id was provided
+                if group_instance and user_instance:
+                    UserGroup.objects.create(
+                        user=user_instance,
+                        group=group_instance,
+                        assigned_by=request.user,
+                        is_active=True
+                    )
+
             return serializer.data
 
-        data = await save_all()
-        headers = self.get_success_headers(data)
-        return Response(data, status=status.HTTP_201_CREATED, headers=headers)
+        try:
+            data = await save_all()
+            headers = self.get_success_headers(data)
+            return Response(data, status=status.HTTP_201_CREATED, headers=headers)
+        except ValueError as e:
+            return Response(
+                {'error': str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
     @action(detail=False, methods=['post'], url_path='create-complete')
     async def create_complete(self, request, *args, **kwargs):
         """
         Create a complete employee with contract, documents, and user account in a single atomic transaction.
-        
+
         Expected payload:
         - employee: JSON string with employee data
         - contract: JSON string with contract data
@@ -80,15 +144,15 @@ class employeAPIView(ModelViewSet):
             employee_data_str = request.data.get('employee')
             if not employee_data_str:
                 return Response(
-                    {'error': 'Employee data is required'}, 
+                    {'error': 'Employee data is required'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
-            
+
             try:
                 employee_data = json.loads(employee_data_str)
             except json.JSONDecodeError:
                 return Response(
-                    {'error': 'Invalid employee data format'}, 
+                    {'error': 'Invalid employee data format'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
@@ -96,29 +160,29 @@ class employeAPIView(ModelViewSet):
             contract_data_str = request.data.get('contract')
             if not contract_data_str:
                 return Response(
-                    {'error': 'Contract data is required'}, 
+                    {'error': 'Contract data is required'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
-            
+
             try:
                 contract_data = json.loads(contract_data_str)
             except json.JSONDecodeError:
                 return Response(
-                    {'error': 'Invalid contract data format'}, 
+                    {'error': 'Invalid contract data format'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
             # Parse documents data
             documents_data = []
             document_files = []
-            
+
             # Extract document files and metadata
             for key, value in request.data.items():
                 if key.startswith('documents[') and key.endswith('].file'):
                     # Extract index from key like 'documents[0].file'
                     index = key.split('[')[1].split(']')[0]
                     metadata_key = f'documents[{index}].metadata'
-                    
+
                     if metadata_key in request.data:
                         try:
                             metadata = json.loads(request.data[metadata_key])
@@ -126,7 +190,7 @@ class employeAPIView(ModelViewSet):
                             document_files.append(value)
                         except json.JSONDecodeError:
                             return Response(
-                                {'error': f'Invalid document metadata format for document {index}'}, 
+                                {'error': f'Invalid document metadata format for document {index}'},
                                 status=status.HTTP_400_BAD_REQUEST
                             )
 
@@ -137,17 +201,17 @@ class employeAPIView(ModelViewSet):
                 employee_serializer = I_employeSerializers(data=employee_data)
                 if not employee_serializer.is_valid():
                     raise ValueError(f"Employee validation error: {employee_serializer.errors}")
-                
+
                 employee_instance = employee_serializer.save()
-                
+
                 # 2. Create contract
                 contract_data['employe_id'] = employee_instance.id
                 contract_serializer = I_contratSerializers(data=contract_data)
                 if not contract_serializer.is_valid():
                     raise ValueError(f"Contract validation error: {contract_serializer.errors}")
-                
+
                 contract_instance = contract_serializer.save()
-                
+
                 # 3. Create documents
                 created_documents = []
                 for i, (doc_metadata, doc_file) in enumerate(zip(documents_data, document_files)):
@@ -160,18 +224,18 @@ class employeAPIView(ModelViewSet):
                         'uploaded_by': request.user.email if request.user.is_authenticated else 'System',
                         'file': doc_file
                     }
-                    
+
                     document_serializer = I_documentSerializers(data=doc_data)
                     if not document_serializer.is_valid():
                         raise ValueError(f"Document {i} validation error: {document_serializer.errors}")
-                    
+
                     document_instance = document_serializer.save()
                     created_documents.append(document_instance)
-                
+
                 # 4. Create user account
                 password = "12345"  # Default password, should be changed on first login
                 user_email = employee_data.get('email_professionnel') or employee_data.get('email_personnel')
-                
+
                 if user_email:
                     user_instance = UserModel(
                         nom=employee_data.get('nom', ''),
@@ -184,7 +248,7 @@ class employeAPIView(ModelViewSet):
                     user_instance.save()
                 else:
                     user_instance = None
-                
+
                 return {
                     'employee': employee_instance,
                     'contract': contract_instance,
@@ -194,7 +258,7 @@ class employeAPIView(ModelViewSet):
 
             # Execute the transaction
             result = await create_complete_employee()
-            
+
             # Prepare response data
             response_data = {
                 'success': True,
@@ -232,18 +296,18 @@ class employeAPIView(ModelViewSet):
                     } if result['user'] else None,
                 }
             }
-            
+
             return Response(response_data, status=status.HTTP_201_CREATED)
-            
+
         except ValueError as e:
             logger.error(f"Validation error in create_complete: {str(e)}")
             return Response(
-                {'error': str(e)}, 
+                {'error': str(e)},
                 status=status.HTTP_400_BAD_REQUEST
             )
         except Exception as e:
             logger.error(f"Unexpected error in create_complete: {str(e)}")
             return Response(
-                {'error': 'An unexpected error occurred during employee creation'}, 
+                {'error': 'An unexpected error occurred during employee creation'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )

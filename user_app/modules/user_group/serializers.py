@@ -18,9 +18,11 @@ class J_UserGroupSerializers(FlexFieldsModelSerializer):
         model = UserGroup
         fields = "__all__"
         expandable_fields = {
-            'user': J_userSerializers,
-            'group': J_GroupSerializers,
-            'assigned_by': J_userSerializers,
+            'user': 'user_app.modules.user.serializers.J_userSerializers',
+            'user.employe_id': ('user_app.modules.employe.serializers.J_employeSerializers', {'source': 'user.employe_id'}),
+            'group': 'user_app.modules.group.serializers.J_GroupSerializers',
+            'group.service_groups': ('user_app.modules.service_group.serializers.J_ServiceGroupSerializer', {'source': 'group.service_groups', 'many': True}),
+            'assigned_by': 'user_app.modules.user.serializers.J_userSerializers',
         }
 
 

@@ -28,24 +28,62 @@ class service(models.Model):
     def __str__(self):
         return self.titre
 
+
+
 # *******************************************************************************************************
-# POSTE                           POSTE                           POSTE                           POSTE
+# USER MANAGEMENT MODELS - RBAC SYSTEM
 # *******************************************************************************************************
-class poste(models.Model):
-    titre = models.CharField(max_length=100)
-    code = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
-    service_id = models.ForeignKey(service, on_delete=models.CASCADE, related_name='postes')
+
+
+class Group(models.Model):
+    """
+    Organizational groups with specific roles and permissions.
+    Predefined groups: ADM, AP, AI, CSE, CH, CS, CSFP, CCI, CM, DIR, GS, IT, JR, LG, PL, PCA, PCR, PCDR, RAF, RRH, SEC
+    """
+    code = models.CharField(max_length=10, unique=True, help_text="Unique group code (e.g., ADM, RRH)")
+    name = models.CharField(max_length=255, help_text="Full group name")
+    description = models.TextField(blank=True, help_text="Description of the group's role and responsibilities")
+    is_active = models.BooleanField(default=True, help_text="Whether this group is currently active")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     class Meta:
-        db_table = 'rh_poste'
+        db_table = 'user_management_group'
+        ordering = ['code']
+        verbose_name = 'Group'
+        verbose_name_plural = 'Groups'
 
     def __str__(self):
-        return self.titre
+        return f"{self.code} - {self.name}"
+
+    @property
+    def user_count(self):
+        """Returns the number of users assigned to this group"""
+        return self.user_groups.filter(is_active=True).count()
+
+    @property
+    def permission_count(self):
+        """Returns the number of permissions assigned to this group"""
+        return self.group_permissions.filter(granted=True).count()
 
 
 # *******************************************************************************************************
-# EMPLOYE                         EMPLOYE                         EMPLOYE                         EMPLOYE
+# SERVICE GROUP                         SERVICE GROUP                         SERVICE GROUP
 # *******************************************************************************************************
+
+class ServiceGroup(models.Model):
+    service = models.ForeignKey(service, on_delete=models.CASCADE, related_name="service_groups")
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="service_groups")
+
+    class Meta:
+        unique_together = ('service', 'group')
+        db_table = 'rh_service_group'
+        verbose_name = "Service - Poste"
+        verbose_name_plural = "Service - Postes"
+
+    def __str__(self):
+        return f"{self.group.code} {self.service.titre}"
+
 class employe(Base_model):
     SEXE_CHOICES = [
         ('M', 'Homme'),
@@ -95,7 +133,7 @@ class employe(Base_model):
     pays = models.CharField(max_length=100, null=True)
     matricule = models.CharField(max_length=100, null=True)
 
-    poste_id = models.ForeignKey(poste, on_delete=models.SET_NULL, null=True, related_name='employes')
+    poste_id = models.ForeignKey(ServiceGroup, on_delete=models.SET_NULL, null=True, related_name='employes')
     responsable_id = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='subordonnes')
     date_embauche = models.DateField()
     statut_emploi = models.CharField(max_length=20, choices=STATUT_EMPLOI_CHOICES, default='ACTIVE')
@@ -118,6 +156,167 @@ class employe(Base_model):
     def full_name(self):
         return f"{self.nom} {self.postnom} {self.prenom}"
 
+
+# *******************************************************************************************************
+# USER                            USER                            USER                            USER
+# *******************************************************************************************************
+
+
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        """Synchronous version for tests"""
+        if not email:
+            raise ValueError(_('L\'email est requis'))
+
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+
+        if password:
+            user.set_password(password)
+
+        from django.db import IntegrityError
+        try:
+            user.save()
+            return user
+        except IntegrityError:
+            raise ValueError(_('Cet email est déjà utilisé. Veuillez utiliser un email différent.'))
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        """Synchronous version for tests"""
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active', True)
+        return self.create_user(email, password, **extra_fields)
+
+    async def acreate_user(self, email, password=None, **extra_fields):
+        """Version asynchrone simple avec gestion d'erreur"""
+        if not email:
+            raise ValueError(_('L\'email est requis'))
+
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+
+        if password:
+            from asgiref.sync import sync_to_async
+            await sync_to_async(user.set_password)(password)
+
+        from django.db import IntegrityError
+        try:
+            await user.asave()
+            return user
+        except IntegrityError:
+            raise ValueError(_('Cet email est déjà utilisé. Veuillez utiliser un email différent.'))
+
+    async def acreate_superuser(self, email, password=None, **extra_fields):
+        """Version asynchrone de create_superuser"""
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active', True)
+        return await self.acreate_user(email, password, **extra_fields)
+
+class User(AbstractBaseUser, PermissionsMixin):
+    id = models.BigAutoField(primary_key=True, db_column='id')
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    email = models.EmailField(null=False, unique=True)
+    photo = models.ImageField(upload_to='user_photos/', blank=True, null=True)
+    employe_id = models.OneToOneField(employe, on_delete=models.SET_NULL, null=True, blank=True, related_name='user_account')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    nom = models.CharField(max_length=200, blank=True)
+    prenom = models.CharField(max_length=200, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    last_login = models.DateTimeField(null=True, blank=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = UserManager()
+
+    class Meta:
+        db_table = 'user'
+
+    def __str__(self):
+        return self.email
+
+    def get_full_name(self):
+        return f"{self.nom} {self.prenom}".strip()
+
+    def get_short_name(self):
+        return self.prenom or self.nom
+
+class UserGroup(models.Model):
+    """
+    Many-to-many relationship between users and groups with additional metadata
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_groups')
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='user_groups')
+    assigned_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='assigned_user_groups')
+    assigned_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        db_table = 'user_management_user_group'
+        unique_together = ['user', 'group']
+        ordering = ['-assigned_at']
+        verbose_name = 'User Group Assignment'
+        verbose_name_plural = 'User Group Assignments'
+
+    def __str__(self):
+        return f"{self.user.email} -> {self.group.code}"
+
+
+class Permission(models.Model):
+    """
+    System permissions for controlling access to resources and actions
+    """
+    ACTION_CHOICES = [
+        ('CREATE', 'Create'),
+        ('READ', 'Read'),
+        ('UPDATE', 'Update'),
+        ('DELETE', 'Delete'),
+    ]
+
+    codename = models.CharField(max_length=100, unique=True, help_text="Unique permission identifier")
+    name = models.CharField(max_length=255, help_text="Human-readable permission name")
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, related_name='user_management_permissions', help_text="The model this permission applies to")
+    resource = models.CharField(max_length=100, help_text="Resource name (e.g., 'employee', 'payroll')")
+    action = models.CharField(max_length=50, choices=ACTION_CHOICES, help_text="Action type (CREATE, READ, UPDATE, DELETE)")
+    description = models.TextField(blank=True, help_text="Detailed description of what this permission allows")
+
+    class Meta:
+        db_table = 'user_management_permission'
+        unique_together = ['resource', 'action']
+        ordering = ['resource', 'action']
+        verbose_name = 'Permission'
+        verbose_name_plural = 'Permissions'
+
+    def __str__(self):
+        return f"{self.resource}.{self.action}"
+
+
+class GroupPermission(models.Model):
+    """
+    Many-to-many relationship between groups and permissions
+    """
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='group_permissions')
+    permission = models.ForeignKey(Permission, on_delete=models.CASCADE, related_name='group_permissions')
+    granted = models.BooleanField(default=True, help_text="Whether this permission is granted or denied")
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='created_group_permissions')
+
+    class Meta:
+        db_table = 'user_management_group_permission'
+        unique_together = ['group', 'permission']
+        ordering = ['group__code', 'permission__resource', 'permission__action']
+        verbose_name = 'Group Permission'
+        verbose_name_plural = 'Group Permissions'
+
+    def __str__(self):
+        status = "granted" if self.granted else "denied"
+        return f"{self.group.code} -> {self.permission} ({status})"
 
 
 # *******************************************************************************************************
@@ -293,95 +492,7 @@ class historique_contrat(models.Model):
     def __str__(self):
         return f"Historique contrat {self.contrat_id}"
 
-# *******************************************************************************************************
-# USER                            USER                            USER                            USER
-# *******************************************************************************************************
 
-
-class UserManager(BaseUserManager):
-    def create_user(self, email, password=None, **extra_fields):
-        """Synchronous version for tests"""
-        if not email:
-            raise ValueError(_('L\'email est requis'))
-
-        email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
-
-        if password:
-            user.set_password(password)
-
-        from django.db import IntegrityError
-        try:
-            user.save()
-            return user
-        except IntegrityError:
-            raise ValueError(_('Cet email est déjà utilisé. Veuillez utiliser un email différent.'))
-
-    def create_superuser(self, email, password=None, **extra_fields):
-        """Synchronous version for tests"""
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('is_active', True)
-        return self.create_user(email, password, **extra_fields)
-
-    async def acreate_user(self, email, password=None, **extra_fields):
-        """Version asynchrone simple avec gestion d'erreur"""
-        if not email:
-            raise ValueError(_('L\'email est requis'))
-
-        email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
-
-        if password:
-            from asgiref.sync import sync_to_async
-            await sync_to_async(user.set_password)(password)
-
-        from django.db import IntegrityError
-        try:
-            await user.asave()
-            return user
-        except IntegrityError:
-            raise ValueError(_('Cet email est déjà utilisé. Veuillez utiliser un email différent.'))
-
-    async def acreate_superuser(self, email, password=None, **extra_fields):
-        """Version asynchrone de create_superuser"""
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('is_active', True)
-        return await self.acreate_user(email, password, **extra_fields)
-
-class User(AbstractBaseUser, PermissionsMixin):
-    id = models.BigAutoField(primary_key=True, db_column='id')
-    phone = models.CharField(max_length=20, blank=True, null=True)
-    email = models.EmailField(null=False, unique=True)
-    photo = models.ImageField(upload_to='user_photos/', blank=True, null=True)
-    employe_id = models.OneToOneField(employe, on_delete=models.SET_NULL, null=True, blank=True, related_name='user_account')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    nom = models.CharField(max_length=200, blank=True)
-    prenom = models.CharField(max_length=200, blank=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
-    last_login = models.DateTimeField(null=True, blank=True)
-    date_joined = models.DateTimeField(auto_now_add=True)
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
-    objects = UserManager()
-
-    class Meta:
-        db_table = 'user'
-
-    def __str__(self):
-        return self.email
-
-    def get_full_name(self):
-        return f"{self.nom} {self.prenom}".strip()
-
-    def get_short_name(self):
-        return self.prenom or self.nom
 # *******************************************************************************************************
 # AUDIT LOG                       AUDIT LOG                       AUDIT LOG                       AUDIT LOG
 # *******************************************************************************************************
@@ -481,109 +592,3 @@ class document(Base_model):
         return f"{self.employe_id.full_name} - {self.titre}"
 
 
-# *******************************************************************************************************
-# USER MANAGEMENT MODELS - RBAC SYSTEM
-# *******************************************************************************************************
-
-class Group(models.Model):
-    """
-    Organizational groups with specific roles and permissions.
-    Predefined groups: ADM, AP, AI, CSE, CH, CS, CSFP, CCI, CM, DIR, GS, IT, JR, LG, PL, PCA, PCR, PCDR, RAF, RRH, SEC
-    """
-    code = models.CharField(max_length=10, unique=True, help_text="Unique group code (e.g., ADM, RRH)")
-    name = models.CharField(max_length=255, help_text="Full group name")
-    description = models.TextField(blank=True, help_text="Description of the group's role and responsibilities")
-    is_active = models.BooleanField(default=True, help_text="Whether this group is currently active")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        db_table = 'user_management_group'
-        ordering = ['code']
-        verbose_name = 'Group'
-        verbose_name_plural = 'Groups'
-
-    def __str__(self):
-        return f"{self.code} - {self.name}"
-
-    @property
-    def user_count(self):
-        """Returns the number of users assigned to this group"""
-        return self.user_groups.filter(is_active=True).count()
-
-    @property
-    def permission_count(self):
-        """Returns the number of permissions assigned to this group"""
-        return self.group_permissions.filter(granted=True).count()
-
-
-class UserGroup(models.Model):
-    """
-    Many-to-many relationship between users and groups with additional metadata
-    """
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_groups')
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='user_groups')
-    assigned_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='assigned_user_groups')
-    assigned_at = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=True)
-
-    class Meta:
-        db_table = 'user_management_user_group'
-        unique_together = ['user', 'group']
-        ordering = ['-assigned_at']
-        verbose_name = 'User Group Assignment'
-        verbose_name_plural = 'User Group Assignments'
-
-    def __str__(self):
-        return f"{self.user.email} -> {self.group.code}"
-
-
-class Permission(models.Model):
-    """
-    System permissions for controlling access to resources and actions
-    """
-    ACTION_CHOICES = [
-        ('CREATE', 'Create'),
-        ('READ', 'Read'),
-        ('UPDATE', 'Update'),
-        ('DELETE', 'Delete'),
-    ]
-
-    codename = models.CharField(max_length=100, unique=True, help_text="Unique permission identifier")
-    name = models.CharField(max_length=255, help_text="Human-readable permission name")
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, related_name='user_management_permissions', help_text="The model this permission applies to")
-    resource = models.CharField(max_length=100, help_text="Resource name (e.g., 'employee', 'payroll')")
-    action = models.CharField(max_length=50, choices=ACTION_CHOICES, help_text="Action type (CREATE, READ, UPDATE, DELETE)")
-    description = models.TextField(blank=True, help_text="Detailed description of what this permission allows")
-
-    class Meta:
-        db_table = 'user_management_permission'
-        unique_together = ['resource', 'action']
-        ordering = ['resource', 'action']
-        verbose_name = 'Permission'
-        verbose_name_plural = 'Permissions'
-
-    def __str__(self):
-        return f"{self.resource}.{self.action}"
-
-
-class GroupPermission(models.Model):
-    """
-    Many-to-many relationship between groups and permissions
-    """
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='group_permissions')
-    permission = models.ForeignKey(Permission, on_delete=models.CASCADE, related_name='group_permissions')
-    granted = models.BooleanField(default=True, help_text="Whether this permission is granted or denied")
-    created_at = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='created_group_permissions')
-
-    class Meta:
-        db_table = 'user_management_group_permission'
-        unique_together = ['group', 'permission']
-        ordering = ['group__code', 'permission__resource', 'permission__action']
-        verbose_name = 'Group Permission'
-        verbose_name_plural = 'Group Permissions'
-
-    def __str__(self):
-        status = "granted" if self.granted else "denied"
-        return f"{self.group.code} -> {self.permission} ({status})"

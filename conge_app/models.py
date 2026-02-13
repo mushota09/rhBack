@@ -1,5 +1,5 @@
 from django.db import models
-from user_app.models import employe,Base_model, poste
+from user_app.models import employe, Base_model, ServiceGroup
 
 
 
@@ -21,13 +21,13 @@ class type_conge(Base_model):
 
     def __str__(self):
         return f"{self.code} - {self.nom}"
-    
-    
 
-# *******************************************************************************************************   
+
+
+# *******************************************************************************************************
 # DEMANDE DE CONGÉ     DEMANDE DE CONGÉ     DEMANDE DE CONGÉ     DEMANDE DE CONGÉ     DEMANDE DE CONGÉ
-# *******************************************************************************************************  
- 
+# *******************************************************************************************************
+
 class demande_conge(Base_model):
     """Modèle de demande de congé"""
     STATUS_CHOICES = [
@@ -77,9 +77,9 @@ class solde_conge(Base_model):
 
     def __str__(self):
         return f"{self.employe_id.full_name} - {self.type_conge_id.nom} ({self.annee})"
-    
-    
-    
+
+
+
 # *****************************************************************************************************************************************
 # HISTORIQUE CONGE              HISTORIQUE CONGE                      HISTORIQUE CONGE              HISTORIQUE CONGE       HISTORIQUE CONGE
 # *****************************************************************************************************************************************
@@ -87,7 +87,7 @@ class solde_conge(Base_model):
 
 class historique_conge(Base_model):
     demande_conge_id = models.ForeignKey(demande_conge, on_delete=models.CASCADE, related_name='historique')
-    poste_valideur_id = models.ForeignKey(poste, on_delete=models.SET_NULL, null=True)
+    poste_valideur_id = models.ForeignKey(ServiceGroup, on_delete=models.SET_NULL, null=True)
     date_validation = models.DateTimeField(auto_now_add=True)
     commentaire = models.TextField(blank=True)
 

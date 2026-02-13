@@ -5,3 +5,5 @@ user_app/migrations/
 paie_app/migrations/
 conge_app/migrations/
 media/
+.hypothesis/
+logs/

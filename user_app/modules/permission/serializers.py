@@ -1,10 +1,11 @@
 # Serializers for permission management endpoints
 
 from rest_framework import serializers
+from adrf_flex_fields import FlexFieldsModelSerializer
 from user_app.models import Permission, GroupPermission
 
 
-class PermissionSerializer(serializers.ModelSerializer):
+class PermissionSerializer(FlexFieldsModelSerializer):
     # Serializer for Permission model
     content_type_name = serializers.CharField(source='content_type.model', read_only=True)
 
@@ -17,25 +18,22 @@ class PermissionSerializer(serializers.ModelSerializer):
         read_only_fields = ['id']
 
 
-class GroupPermissionReadSerializer(serializers.ModelSerializer):
-    # Read serializer for GroupPermission model
-    group = serializers.SerializerMethodField()
-    permission = PermissionSerializer(read_only=True)
-    created_by_email = serializers.CharField(source='created_by.email', read_only=True)
+class GroupPermissionReadSerializer(FlexFieldsModelSerializer):
+    # Read serializer for GroupPermission model with expandable fields
+    group = serializers.PrimaryKeyRelatedField(read_only=True)
+    permission = serializers.PrimaryKeyRelatedField(read_only=True)
+    created_by = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = GroupPermission
         fields = [
-            'id', 'group', 'permission', 'granted', 'created_at', 'created_by_email'
+            'id', 'group', 'permission', 'granted', 'created_at', 'created_by'
         ]
         read_only_fields = ['id', 'created_at']
-
-    def get_group(self, obj):
-        # Get group information
-        return {
-            'id': obj.group.id,
-            'code': obj.group.code,
-            'name': obj.group.name
+        expandable_fields = {
+            'group': 'user_app.modules.group.serializers.J_GroupSerializers',
+            'permission': 'user_app.modules.permission.serializers.PermissionSerializer',
+            'created_by': 'user_app.modules.user.serializers.J_userSerializers',
         }
 
 
